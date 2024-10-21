@@ -1,31 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Grid, IconButton } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import Plot from 'react-plotly.js';
 import Papa from 'papaparse';
-import btcImage from '../../../images/btc.png';
-import ethImage from '../../../images/eth.png';
-import adaImage from '../../../images/ada.png';
-import linkImage from '../../../images/link.png';
-import ltcImage from '../../../images/ltc.png';
-import bnbImage from '../../../images/bnb.png';
-import maticImage from '../../../images/matic.png';
-import solImage from '../../../images/sol.png';
 
-// Sample token images (you would replace these with actual images or import them)
-const tokenImages = {
-  BTC: btcImage, 
-  ETH: ethImage,
-  ADA: adaImage,
-  LINK: linkImage,
-  LTC: ltcImage,
-  BNB: bnbImage,
-  MATIC: maticImage,
-  SOL: solImage,
-};
-
-const LinePlotChart = () => {
+const LinePlotChart = ({ selectedToken }) => {
   const [dataByToken, setDataByToken] = useState({});
-  const [selectedToken, setSelectedToken] = useState('');
   const [availableTokens, setAvailableTokens] = useState([]);
 
   // Function to fetch and parse the CSV file
@@ -56,11 +35,6 @@ const LinePlotChart = () => {
             setDataByToken(tokenMap);
             const tokens = Object.keys(tokenMap);
             setAvailableTokens(tokens);
-
-            // Set the first token as default selected token
-            if (tokens.length > 0) {
-              setSelectedToken(tokens[0]);
-            }
           }
         });
       });
@@ -71,39 +45,11 @@ const LinePlotChart = () => {
     loadCSVData();
   }, []);
 
-  // Handle Token Selection via icon click
-  const handleTokenChange = (token) => {
-    setSelectedToken(token);
-  };
-
   return (
     <Box>
       <Typography variant="h6" gutterBottom>
-        Real Price vs Prediction Ensemble Over Time (Token: {selectedToken})
+        Real Price vs CryptoVoice Prediction (Token: {selectedToken})
       </Typography>
-
-      {/* Token Selection as icons */}
-      {availableTokens.length > 0 && (
-        <Grid container spacing={2} style={{ marginBottom: '20px' }}>
-          {availableTokens.map((token) => (
-            <Grid item key={token}>
-              <IconButton onClick={() => handleTokenChange(token)}>
-                <img
-                  src={tokenImages[token]} // Use the token image for each button
-                  alt={token}
-                  style={{
-                    width: 40,  // Adjust size as needed
-                    height: 40, // Adjust size as needed
-                    border: selectedToken === token ? '2px solid #1976d2' : 'none', // Highlight selected token
-                    borderRadius: '50%', // Make it circular
-                  }}
-                />
-              </IconButton>
-              <Typography variant="caption">{token}</Typography> {/* Label below each icon */}
-            </Grid>
-          ))}
-        </Grid>
-      )}
 
       {/* Plot for the selected token */}
       {selectedToken && dataByToken[selectedToken] && dataByToken[selectedToken].length > 0 ? (
@@ -114,7 +60,7 @@ const LinePlotChart = () => {
               y: dataByToken[selectedToken].map((point) => point.realPrice),
               mode: 'lines',
               type: 'scatter',
-              line: { color: '#1f77b4', width: 2 },
+              line: { color: '#1f77b4', width: 1 },
               name: 'Real Price',
             },
             {
@@ -123,7 +69,7 @@ const LinePlotChart = () => {
               mode: 'lines',
               type: 'scatter',
               line: { color: '#ff7f0e', width: 2 },
-              name: 'Prediction Ensemble',
+              name: 'Prediction',
             }
           ]}
           layout={{
@@ -141,12 +87,20 @@ const LinePlotChart = () => {
               xanchor: 'center',
               y: -0.2,
               yanchor: 'top',
+              font: { 
+                color: 'black' // Set the legend font color to black
+              }
             },
+            paper_bgcolor: 'rgba(255, 255, 255, 0)', // Transparent paper background
+            plot_bgcolor: 'rgba(255, 255, 255, 0)', // Semi-transparent plot background
           }}
           useResizeHandler
           style={{ width: '100%' }}
-          config={{ displayModeBar: true }}
-        />
+          config={{ 
+            displayModeBar: true,
+            modeBarButtonsToRemove: ['pan', 'zoomOut'], // Optional: Remove specific buttons if needed
+            displaylogo: false, // Optional: Hide Plotly logo
+          }}        />
       ) : (
         <Typography>No data available for the selected token.</Typography>
       )}

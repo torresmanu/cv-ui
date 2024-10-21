@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { dashboard as dashboardRoutes, auth as authRoutes } from "./index";
+import { dashboard as dashboardRoutes, auth as authRoutes, landing as landingRoutes } from "./index";
 
 import DashboardLayout from "../layouts/Dashboard";
 import AuthLayout from "../layouts/Auth";
+import LandingLayout from "../layouts/Landing";  // Import the new Landing layout
 import Page404 from "../pages/auth/Page404";
 import { Suspense } from "react";
 
@@ -39,10 +40,18 @@ const childRoutes = (Layout, routes) =>
   );
 
 const Routes = () => (
-    <Switch>
-      {childRoutes(DashboardLayout, dashboardRoutes)}
-      {childRoutes(AuthLayout, authRoutes)}
-      <Suspense fallback={<div>Loading...</div>}>
+  <Switch>
+    {/* Dashboard Layout Routes */}
+    {childRoutes(DashboardLayout, dashboardRoutes)}
+    
+    {/* Auth Layout Routes */}
+    {childRoutes(AuthLayout, authRoutes)}
+    
+    {/* Landing Layout Routes */}
+    {childRoutes(LandingLayout, landingRoutes)}
+    
+    {/* Fallback Route */}
+    <Suspense fallback={<div>Loading...</div>}>
       <Route
         render={() => (
           <AuthLayout>
@@ -50,8 +59,8 @@ const Routes = () => (
           </AuthLayout>
         )}
       />
-      </Suspense>
-    </Switch>
+    </Suspense>
+  </Switch>
 );
 
 export default Routes;

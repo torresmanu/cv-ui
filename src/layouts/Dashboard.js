@@ -44,7 +44,6 @@ const Root = styled.div`
 
 const Drawer = styled.div`
   ${props => props.theme.breakpoints.up("md")} {
-    width: ${drawerWidth};
     flex-shrink: 0;
   }
 `;
@@ -66,7 +65,7 @@ const MainContent = styled(Paper)`
   }
   
   ${props => props.theme.breakpoints.up("md")} {
-    max-width: calc(100vw - ${drawerWidth});
+    max-width: calc(100vw);
   }
  
 
@@ -97,26 +96,16 @@ class Dashboard extends React.Component {
         <CssBaseline />
         <GlobalStyle />
         <Drawer>
-          <Hidden mdUp implementation="js">
             <Sidebar
               routes={routes}
-              PaperProps={{ style: { width: mobileDrawerWidth } }}
+              PaperProps={{ style: { width: '20%' } }}
               variant="temporary"
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
             />
-          </Hidden>
-          <Hidden smDown implementation="css">
-            <Sidebar
-              routes={routes}
-              PaperProps={{ style: { width: drawerWidth } }}
-            />
-          </Hidden>
         </Drawer>
         <AppContent>
-          <Hidden mdUp>
-            <Header onDrawerToggle={this.handleDrawerToggle}/>
-          </Hidden>
+          <Header onDrawerToggle={this.handleDrawerToggle}/>
           <MainContent p={10}>
             {children}
           </MainContent>

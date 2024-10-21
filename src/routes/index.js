@@ -45,6 +45,9 @@ const Database = NeedsLogin(() => import("../pages/pages/Database/Database"));
 //Account Routes
 const MyAccount = NeedsLogin(() => import("../pages/pages/Account/MyAccount"));
 
+const Home = NoLogin(() => import("../pages/pages/home/Homepage"));
+
+
 const permissions = JSON.parse(sessionStorage.getItem(GLOBALS.SESSION_KEYS.PERMISSIONS));
 const canSeeKPI = permissions ? permissions['stats']?.find((perm)=>(perm===GLOBALS.PERMISSIONS.CAN_SEE_KPI)) 
   || permissions['reports']?.find((perm)=>(perm===GLOBALS.PERMISSIONS.LIST))
@@ -219,6 +222,12 @@ const DatabaseRoutes = {
   hidden: !canSeeDatabase,
 };
 
+const landingRoutes = {
+    path: "/landing",
+    name: "Landing",
+    component: Home,
+};
+
 
 export const dashboard = [
   homeRoutes,
@@ -237,6 +246,8 @@ export const dashboard = [
 ];
 
 export const auth = [authRoutes];
+
+export const landing = [landingRoutes];
 
 export default [
   homeRoutes,
