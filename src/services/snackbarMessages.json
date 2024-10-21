@@ -1,0 +1,100 @@
+{
+ "error":{
+   "account":{
+     "post": "Account could not be modified"
+   },
+   "permissions":{
+     "get": "User Permissions could not be retrieved",
+     "set": "User Permissions could not be set",
+     "post": "Account could not be modified"
+   },
+   "institutions": {
+     "set": "Institution could not be set",
+     "edit": "Institution could not be modified",
+     "get": "Institution Information could not be retrieved",
+     "list_all": "Institutions could not be retrieved"
+   },
+   "task_sequences":{
+     "get": "Data could not be retrieved",
+     "set": "Task Sequence could not be set",
+      "delete": "Task Sequence could not be deleted"
+   },
+   "portalUsers": {
+     "set": "User could not be set",
+     "edit": "User could not be modified",
+     "create": "User could not be created",
+     "link": "User could not be linked",
+     "unlink": "User could not be unlinked",
+     "get": "User Information could not be retrieved",
+     "list": "Users could not be retrieved",
+     "access_denied": "Access Denied for list Users",
+     "reset_user_password": "Password could not be modified",
+     "disable": "User could not be disabled",
+     "enable": "User could not be enabled"
+   },
+   "instances": {
+     "get": "Instances could not be retrieved",
+     "get_product": "Instance could not be retrieved",
+     "update": "Instance could not be updated",
+     "get_version_list": "Version list could not be retrieved",
+     "liberate": "Instance could not be released",
+     "create": "Instance could not be created"
+   },
+   "report":{
+     "get": "Report could not be retrieved",
+     "get_master_evals": "KPI data could not be retrieved",
+     "access_denied": "Access Denied for KPI data"
+   },
+   "auth": {
+     "logout": "Logout failed"
+   },
+   "KPI": {
+     "store_user_kpi": "User KPI could not be stored",
+     "get_user_kpi": "User KPIs could not be retrieved",
+     "get_filter_values": "Filter Values could not be retrieved",
+     "build_kpi": "KPI could not be built",
+     "get_evaluators": "Evaluators could not be retrieved"
+   },
+   "researchDB": {
+     "search": "ResearchDB search could not be done",
+     "get_filter_values": "Filter Values could not be retrieved"
+   }
+ },
+ "success":{
+   "account": {
+     "post": "Account modified successfully"
+   },
+   "permissions": {
+     "set": "Permissions modified successfully"
+   },
+   "institutions": {
+     "edit": "Institution modified successfully",
+     "add": "Institution created successfully"
+   },
+   "task_sequences": {
+     "set": "Task Sequence set successfully",
+     "delete": "Task Sequence deleted successfully"
+   },
+   "portalUsers": {
+     "edit": "User modified successfully",
+     "create": "User created successfully",
+     "link": "User linked successfully",
+     "unlink": "User unlinked successfully",
+     "password": "Password modified successfully",
+     "disable": "User disabled successfully",
+     "enable": "User enabled successfully"
+   },
+   "instances": {
+     "liberate": "Instance released successfully",
+     "update": "App Version updated successfully",
+     "create": "Instance created successfully",
+     "edit": "Instance information modified successfully"
+    },
+   "report":{
+     "get_master_evals": "KPI data retrieved successfully"
+   },
+   "KPI": {
+     "store_user_kpi": "User KPI stored successfully"
+   }
+ }
+}

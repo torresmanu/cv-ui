@@ -1,0 +1,108 @@
+{
+  "VERSION": "1.17.0.dev.00",
+  "SESSION_KEYS":{
+    "EXPIRATION_TIME": "expiration_time",
+    "EXPIRATION_DATE": "expiration_date",
+    "API": "api",
+    "USER": "username",
+    "USER_ID": "user_id",
+    "USER_FNAME": "user_first_name",
+    "USER_LNAME": "user_last_name",
+    "TOKEN": "token",
+    "USER_INSTITUTIONS": "user_institutions",
+    "PERMISSIONS": "permissions"
+  },
+  "PERMISSIONS": {
+    "SEE_ALL_OWN_INST": "see_all_own_institution",
+    "SET": "set",
+    "GET": "get",
+    "LIST": "list",
+    "LIST_EVALUATORS": "list_evaluators",
+    "LINK_USER": "link_user",
+    "CAN_SET_PERMISSIONS": "set_permissions",
+    "CAN_GET_PERMISSIONS": "get_permissions",
+    "CAN_LIST_PERMISSIONS": "list_permissions",
+    "CAN_EDIT_INSTANCES": "set_product",
+    "CAN_CREATE_INSTANCES": "create",
+    "CAN_UPDATE_INSTANCES": "set_instance_version",
+    "CAN_LIBERATE_INSTANCES": "liberate",
+    "CAN_SEE_KPI": "get_failure_stats",
+    "CAN_SET_PASSWORD": "set_password",
+    "CAN_RESEARCH_DB": "get_filter_values",
+    "CAN_GET_FAILURES": "get_failure_stats",
+    "CAN_SEARCH_DB": "search",
+    "CAN_SEE_MASTER_LIST": "list",
+    "CAN_GET_HIDDEN_STUDIES": "get_hidden_studies",
+    "CAN_SET_HIDDEN_STUDIES": "set_hidden_studies",
+    "CAN_CHANGE_HMD_SN": "set_hmd_change"
+  },
+  "HEADERS_VALUES": {
+    "PARTNER": "VMPartner",
+    "LOGIN": "Login",
+    "BASIC": "Basic"
+  },
+  "HEADERS_NAMES": {
+    "AUTHORIZATION": "Authorization",
+    "AUTH_TYPE": "AuthType",
+    "LOGIN_TYPE": "LoginType"
+  },
+  "ENDPOINTS": {
+    "INSTITUTION": {
+      "LIST": "institution/list",
+      "GET_REGION": "institution/get_region_list",
+      "GET": "institution/get",
+      "SET": "institution/set"
+    },
+    "REPORTS": {
+      "LIST": "reports/list",
+      "GET_EVALUATORS": "reports/list_evaluators"
+    },
+    "STATS": {
+      "GET_USER_KPI": "stats/get_user_kpi",
+      "GET_FILTER_VALUES": "stats/get_filter_values",
+      "BUILD_KPI": "stats/build_kpi",
+      "STORE_USER_KPI": "stats/set_user_kpi",
+      "GET_FAILURES": "stats/get_failure_stats"
+    },
+    "PORTAL_USER": {
+      "MODIFY_OWN": "portal_users/set_own_user",
+      "LOGOUT": "portal_users/logout",
+      "GET_PERMISSIONS": "portal_users/get_permissions",
+      "SET_PERMISSIONS": "portal_users/set_permissions",
+      "LIST_PERMISSIONS": "portal_users/list_permissions",
+      "GET": "portal_users/get",
+      "SET": "portal_users/set",
+      "SET_INST": "portal_users/set_login_institution",
+      "LIST": "portal_users/list",
+      "SEARCH": "portal_users/search",
+      "LINK": "portal_users/link_user",
+      "RESET_PASSWORD": "portal_users/reset_password_request"
+    },
+    "DB": {
+      "SEARCH": "research_db/search",
+      "GET_FILTER_VALUES": "research_db/get_filter_values"
+    },
+    "INSTANCE": {
+      "LIST": "instances/list",
+      "GET_ALL_STD": "extras/get_all_std_string",
+      "SET_STD_STRING": "extras/set_std_string",
+      "GET_PRODUCT": "instances/get_product",
+      "SET_PRODUCT": "instances/set_product",
+      "SET_VERSION": "instances/set_instance_version",
+      "CREATE_PRODUCT": "instances/create",
+      "LIBERATE_PRODUCT": "instances/liberate",
+      "PASSWORD_RECOVERY": "instances/reset_app_recovery_password",
+      "GET_VERSION_LIST": "instances/get_version_list",
+      "SET_HMD_SN": "instances/set_hmd_change",
+      "GET_HIDDEN_STUDIES": "instances/get_hidden_studies",
+      "SET_HIDDEN_STUDIES": "instances/set_hidden_studies"
+    },
+    "TASK_SEQUENCE": {
+      "LIST": "task_sequences/list",
+      "SET": "task_sequences/set"
+    }
+  },
+  "DOMAIN": {
+    "URL": "/portal"
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "research_db":[ "search", "get_filter_values"],
+    "extras": ["get_all_std_string", "set_std_string"],
+    "instances": ["list", "get_product", "set_product", "set_instance_version", "create", "liberate","reset_app_recovery_password", "get_version_list", "set_hmd_change", "get_hidden_studies", "set_hidden_studies"],
+    "institution": ["list", "get_region_list", "get", "set"],
+    "reports": ["list", "list_reports_inst", "list_reports_inst_user", "list_inst", "list_inst_user", "list_evaluators", "get_report_inst", "get_report_inst_user", "list_subject_inst", "get_evaluation_report_inst", "get_evaluation_report_inst_user"],
+    "stats": ["get_failure_stats"],
+    "portal_users": ["reset_password_request", "list", "get", "search", "link_user", "set", "get_permissions", "set_permissions", "list_permissions", "set_login_institution", "set_own_user", "logout"],
+    "medical_record": ["list_inst", "set_inst", "get_inst"],
+    "subjects": ["list_inst", "list_inst_user"],
+    "task_sequences": ["list", "set"]
+}
