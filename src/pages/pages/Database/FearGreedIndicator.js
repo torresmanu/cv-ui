@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Typography, Box, LinearProgress, Tooltip } from '@material-ui/core';
 import { Icon } from '@iconify/react';
+import CountUp from 'react-countup'; // Import CountUp for animation
 import emoticonHappyOutline from '@iconify/icons-mdi/emoticon-happy-outline';
 import sadFaceIcon from '@iconify-icons/mdi/emoticon-sad-outline';
 import trendingDownFill from '@iconify/icons-eva/trending-down-fill'; // Bearish Icon
@@ -9,8 +10,7 @@ import trendingUpFill from '@iconify/icons-eva/trending-up-fill'; // Bullish Ico
 
 const Container = styled.div`
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.3); /* Add transparency */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.7)); /* Gradient from light to dark */
   padding: 20px;
   text-align: center;
   color: white;
@@ -23,7 +23,10 @@ const LinearProgressWithLabel = (props) => {
         <LinearProgress variant="determinate" {...props} />
       </Box>
       <Box minWidth={35}>
-        <Typography variant="body2" style={{ color: '#fff' }}>{`${Math.round(props.value)}%`}</Typography>
+        <Typography variant="body2" style={{ color: '#fff' }}>
+          {/* Use CountUp for animating the percentage */}
+          <CountUp end={Math.round(props.value)} duration={2.5} />%
+        </Typography>
       </Box>
     </Box>
   );
@@ -43,7 +46,7 @@ const FearGreedIndicator = ({ value }) => {
       </Tooltip>
 
       {/* Subtitle explaining the model */}
-      <Typography variant="body2" style={{ marginBottom: '1em', fontStyle: 'italic' }}>
+      <Typography variant="body2" style={{ marginBottom: '1em', fontStyle: 'italic', color: '#ffffff' }}>
         This index is calculated using news and social media data.
       </Typography>
 
@@ -53,7 +56,7 @@ const FearGreedIndicator = ({ value }) => {
             icon={isFear ? sadFaceIcon : emoticonHappyOutline}
             width="64"
             height="64"
-            style={{ color: isFear ? 'red' : 'green' }}
+            style={{ color: isFear ? 'red' : 'hsl(120, 100%, 65%)' }}
           />
         </Tooltip>
         <Typography variant="h6">
@@ -67,14 +70,14 @@ const FearGreedIndicator = ({ value }) => {
       {/* Market Sentiment */}
       <Grid container justify="center" spacing={2} style={{ marginTop: '1em' }}>
         <Grid item>
-        <Box display="flex" alignItems="center">
-          <Icon
-            icon={trendingDownFill}
-            width="40"
-            height="40"
-            style={{ color: 'red', backgroundColor: 'rgba(255, 0, 0, 0.2)', borderRadius: '50%', padding: '5px', marginRight: '8px' }}
-          />
-          <Typography variant="caption">Bearish</Typography>
+          <Box display="flex" alignItems="center">
+            <Icon
+              icon={trendingDownFill}
+              width="40"
+              height="40"
+              style={{ color: 'red', backgroundColor: 'rgba(255, 0, 0, 0.2)', borderRadius: '50%', padding: '5px', marginRight: '8px' }}
+            />
+            <Typography variant="caption">Bearish</Typography>
           </Box>
         </Grid>
         <Grid item>
@@ -83,7 +86,7 @@ const FearGreedIndicator = ({ value }) => {
               icon={trendingUpFill}
               width="40"
               height="40"
-              style={{ color: 'green', backgroundColor: 'rgba(0, 255, 0, 0.2)', borderRadius: '50%', padding: '5px', marginRight: '8px' }} // Added marginRight for spacing
+              style={{ color: 'green', backgroundColor: 'rgba(0, 255, 0, 0.2)', borderRadius: '50%', padding: '5px', marginRight: '8px' }}
             />
             <Typography variant="caption">Bullish</Typography>
           </Box>
