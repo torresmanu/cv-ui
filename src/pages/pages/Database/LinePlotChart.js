@@ -46,7 +46,7 @@ const LinePlotChart = ({ selectedToken }) => {
   }, []);
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: 'transparent' }}>
       <Typography variant="h6" gutterBottom>
         Real Price vs CryptoVoice Prediction (Token: {selectedToken})
       </Typography>
@@ -100,7 +100,8 @@ const LinePlotChart = ({ selectedToken }) => {
             displayModeBar: true,
             modeBarButtonsToRemove: ['pan', 'zoomOut'], // Optional: Remove specific buttons if needed
             displaylogo: false, // Optional: Hide Plotly logo
-          }}        />
+          }}        
+        />
       ) : (
         <Typography>No data available for the selected token.</Typography>
       )}

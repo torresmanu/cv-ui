@@ -25,16 +25,6 @@ const tokenImages = {
 const TokenToolbar = ({ selectedToken, onTokenChange, favoriteTokens, setFavoriteTokens }) => {
   const availableTokens = Object.keys(tokenImages);
 
-  // Handle favorite toggle for the selected token
-  const handleFavoriteToggle = () => {
-    if (favoriteTokens.includes(selectedToken)) {
-      // Remove from favorites if already a favorite
-      setFavoriteTokens(favoriteTokens.filter(token => token !== selectedToken));
-    } else {
-      // Add to favorites if not a favorite
-      setFavoriteTokens([...favoriteTokens, selectedToken]);
-    }
-  };
 
   return (
     <div>
@@ -58,27 +48,6 @@ const TokenToolbar = ({ selectedToken, onTokenChange, favoriteTokens, setFavorit
           </Grid>
         ))}
 
-        {/* Favorite Button */}
-        <Grid item>
-          <Box display="flex" justifyContent="center" alignItems="center">
-            <IconButton
-              onClick={handleFavoriteToggle}
-              aria-label="favorite"
-              style={{
-                backgroundColor: '#f1f1f1',
-                padding: 10,
-                borderRadius: '50%',
-                marginLeft: '10px',  // Add some space from the token icons
-              }}
-            >
-              {favoriteTokens.includes(selectedToken) ? (
-                <Star style={{ color: '#ffcc00', width: 30, height: 30 }} /> // Filled star for favorite
-              ) : (
-                <StarBorder style={{ width: 30, height: 30 }} /> // Outline star for non-favorite
-              )}
-            </IconButton>
-          </Box>
-        </Grid>
       </Grid>
     </div>
   );

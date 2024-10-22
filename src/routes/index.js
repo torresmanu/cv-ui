@@ -45,7 +45,7 @@ const Database = NeedsLogin(() => import("../pages/pages/Database/Database"));
 //Account Routes
 const MyAccount = NeedsLogin(() => import("../pages/pages/Account/MyAccount"));
 
-const Home = NoLogin(() => import("../pages/pages/home/Homepage"));
+const Home = async(() => import("../pages/pages/home/Homepage"));
 
 
 const permissions = JSON.parse(sessionStorage.getItem(GLOBALS.SESSION_KEYS.PERMISSIONS));
@@ -215,11 +215,10 @@ const authRoutes = {
 };
 
 const DatabaseRoutes = {
-  id: "Database",
-  path: "/database",
+  id: "Dashboard",
+  path: "/dashboard",
   component: Database,
-  icon: <StorageIcon />,
-  hidden: !canSeeDatabase,
+  icon: <BarChart />,
 };
 
 const landingRoutes = {
@@ -232,16 +231,6 @@ const landingRoutes = {
 export const dashboard = [
   homeRoutes,
   accountRoutes,
-  pagesRoutes,
-  institutionsRoutes,
-  setEvaluationRoutes,
-  addInstitutionRoutes,
-  addUserRoutes,
-  usersRoutes,
-  instancesRoutes,
-  editInstanceRoutes,
-  masterUsersListRoutes,
-  StatsRoutes,
   DatabaseRoutes
 ];
 
@@ -252,16 +241,5 @@ export const landing = [landingRoutes];
 export default [
   homeRoutes,
   accountRoutes,
-  pagesRoutes,
-  authRoutes,
-  institutionsRoutes,
-  setEvaluationRoutes,
-  addInstitutionRoutes,
-  addUserRoutes,
-  usersRoutes,
-  instancesRoutes,
-  editInstanceRoutes,
-  masterUsersListRoutes,
-  StatsRoutes,
   DatabaseRoutes
 ];
