@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: -100, // Higher z-index to ensure it's in front
   },
   button: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(4),
     backgroundColor: '#fff',
-    color: '#1976d2',
+    color: 'black',
     '&:hover': {
-      backgroundColor: '#1976d2',
+      backgroundColor: 'black',
       color: '#fff',
     },
   },

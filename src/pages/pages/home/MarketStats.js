@@ -29,19 +29,21 @@ const MarketStats = () => {
       <Grid container spacing={3} justifyContent="center">
 
       <Grid item container xs={12} md={4} justifyContent='center'>
-                    <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center'>            <Typography variant="h6">Total Market Cap</Typography>
-            <Typography className={classes.statNumber}>
-              <CountUp start={0} end={2000} duration={5} prefix="$" suffix="B" />
-            </Typography>
-            </Box>
+        <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center'>           
+          <Typography variant="h6">Total Market Cap</Typography>
+          <Typography className={classes.statNumber}>
+            <CountUp start={0} end={2000} duration={5} prefix="$" suffix="B" />
+          </Typography>
+        </Box>
         </Grid>
 
         <Grid item container xs={12} md={4} justifyContent='center'>
-                    <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center'>            <Typography variant="h6">24H Trading Volume</Typography>
+          <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center'>   
+            <Typography variant="h6">24H Trading Volume</Typography>
             <Typography className={classes.statNumber}>
               <CountUp start={0} end={100} duration={5} prefix="$" suffix="B" />
             </Typography>
-            </Box>
+          </Box>
         </Grid>
       </Grid>
     </Box>

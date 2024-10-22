@@ -12,7 +12,7 @@ const Homepage = () => {
       <HeroSection />
       <MarketStats />
       <HomePartners />
-      <DashboardPreview />
+      <FeaturesSection />
       </>
   );
 };

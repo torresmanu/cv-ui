@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   dashboardPreview: {
-    background: '#1976d2',
+    background: '#fff', // Set background to white
     padding: theme.spacing(6),
     textAlign: 'center',
-    color: '#fff',
+    color: '#000', // Set typography color to black
     borderRadius: '12px',
   },
   dashboardImage: {
