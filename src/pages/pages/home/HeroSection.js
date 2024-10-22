@@ -41,7 +41,7 @@ const HeroSection = () => {
   const history = useHistory();  // Initialize useHistory for navigation
 
   const handleClick = () => {
-    history.push('/dashboard');  // Redirect to dashboard
+    history.push('/auth/sign-in');  // Redirect to dashboard
   };
 
   return (

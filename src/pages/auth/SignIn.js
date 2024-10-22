@@ -23,6 +23,8 @@ import {Logo} from "../components/Logo";
 import logo from "../../images/Logo4.png";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { useHistory } from 'react-router-dom'; // For navigation in react-router-dom v5
+
 
 const Button = styled(MuiButton)(spacing);
 
@@ -41,15 +43,14 @@ function SignIn({error}) {
     username: "",
     password: ""
   });
+  const history = useHistory();  // Initialize useHistory for navigation
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   function handleSubmit(event) {
-    setLoading(true)
-    event.preventDefault();
-    AuthService.login(fields.username, fields.password)
+    history.push('/dashboard');  // Redirect to dashboard
   }
 
   return (

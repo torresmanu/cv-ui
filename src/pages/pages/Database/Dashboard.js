@@ -3,10 +3,13 @@ import { Grid, Button, Dialog, DialogContent, IconButton, Box, Typography, Slide
 import { makeStyles } from '@material-ui/core/styles';
 import { Star, StarBorder, TrendingUp, TrendingDown } from '@material-ui/icons'; // Icons
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import CurrentPricesCard from './CurrentPricesCard';
 import ChartsContainer from './ChartsContainer';
 import TokenToolbar from './TokenToolbar';
 import FearGreedIndicator from './FearGreedIndicator';
+import Papa from 'papaparse';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,13 +43,68 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = ({ evaluations, subjects }) => {
+const Dashboard = ({ }) => {
   const classes = useStyles();
   const [selectedToken, setSelectedToken] = useState('BTC');
   const [favoriteTokens, setFavoriteTokens] = useState(['BTC', 'ETH']);
   const [openAlertModal, setOpenAlertModal] = useState(false);
   const [lowerThreshold, setLowerThreshold] = useState(1000);
   const [upperThreshold, setUpperThreshold] = useState(50000);
+
+  const [dataByToken, setDataByToken] = useState({});
+  const [availableTokens, setAvailableTokens] = useState([]);
+
+    // Function to fetch and parse the CSV file
+    const loadCSVData = () => {
+      fetch('/predicciones.csv') // Update with your actual CSV file path
+        .then(response => response.text()) // Get the raw CSV text
+        .then(csvText => {
+          Papa.parse(csvText, {
+            header: true, // Use the first row as the header
+            dynamicTyping: true, // Automatically convert types (e.g., numbers)
+            complete: (results) => {
+              // Group the data by Token
+              const tokenMap = {};
+              results.data.forEach(row => {
+                if (row.Token && row.Real_price && row.Prediction_Ensemble) {
+                  if (!tokenMap[row.Token]) {
+                    tokenMap[row.Token] = [];
+                  }
+                  tokenMap[row.Token].push({
+                    date: new Date(row.Fecha),
+                    realPrice: row.Real_price,
+                    predictionEnsemble: row.Prediction_Ensemble,
+                  });
+                }
+              });
+              
+              // Set the grouped data by Token
+              setDataByToken(tokenMap);
+              const tokens = Object.keys(tokenMap);
+              setAvailableTokens(tokens);
+            }
+          });
+        });
+    };
+
+    useEffect(() => {
+      loadCSVData();
+    }, []);
+
+    // Function to download the CSV data for the selected token
+    const downloadCSV = () => {
+      if (selectedToken && dataByToken[selectedToken]) {
+        const csv = Papa.unparse(dataByToken[selectedToken]);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${selectedToken}_data.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    };
 
   const handleFavoriteToggle = () => {
     if (favoriteTokens.includes(selectedToken)) {
@@ -102,6 +160,11 @@ const Dashboard = ({ evaluations, subjects }) => {
 
         <Button variant="contained" color="primary" onClick={handleOpenAlertModal} startIcon={<NotificationsIcon />}>
           Create Alert
+        </Button>
+        
+        {/* Button to download CSV data */}
+        <Button variant="outlined" color="primary" onClick={downloadCSV} startIcon={<GetAppIcon/>}>
+          Download CSV Data
         </Button>
       </Grid>
 

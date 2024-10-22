@@ -8,8 +8,8 @@ import Loader from "../components/Loader";
 const locationHelper = locationHelperBuilder({})
 
 const userIsAuthenticatedDefaults = {
-  authenticatedSelector: state => state.auth.signedIn,
-  authenticatingSelector: state => state.auth.loading,
+  authenticatedSelector: state => true,
+  authenticatingSelector: state => false,
   wrapperDisplayName: 'UserIsAuthenticated'
 }
 
