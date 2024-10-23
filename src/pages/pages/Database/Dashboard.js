@@ -56,7 +56,7 @@ const Dashboard = () => {
   const [availableTokens, setAvailableTokens] = useState([]);
     // Function to fetch and parse the CSV file
     const loadCSVData = () => {
-      fetch('/predicciones.csv') // Update with your actual CSV file path
+      fetch(`${process.env.PUBLIC_URL}/data.csv`) // Update with your actual CSV file path
         .then(response => response.text()) // Get the raw CSV text
         .then(csvText => {
           Papa.parse(csvText, {

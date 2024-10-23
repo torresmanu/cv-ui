@@ -9,7 +9,7 @@ const LinePlotChart = ({ selectedToken }) => {
   const [groupByDay, setGroupByDay] = useState(true); // State to toggle between group by day and hourly
 
   const loadCSVData = () => {
-    fetch('/predicciones.csv')
+    fetch(`${process.env.PUBLIC_URL}/data.csv`)
       .then(response => response.text())
       .then(csvText => {
         Papa.parse(csvText, {
