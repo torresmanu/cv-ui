@@ -17,8 +17,8 @@ const darkVariant = {
     }
   },
   header: {
-    color: grey[500],
-    background: "#FFFFFF",
+    color: "#121212",
+    background: "#121212",
     search: {
       color: grey[800]
     },
@@ -31,7 +31,7 @@ const darkVariant = {
     background: "#F6FBFF",
     header: {
       color: grey[900],
-      background: "#F6FBFF",
+      background: "#121212",
       brand: {
         color: blue[500]
       }
@@ -49,7 +49,7 @@ const darkVariant = {
     }
   },
   body: {
-    background: "linear-gradient(180deg, white, black)"  // <-- Set your gradient background here
+    background: "linear-gradient(180deg, #121212, #1C1B1B)",  // Corrected gradient string
   }
 };
 

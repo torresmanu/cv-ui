@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       width: '100%',
       marginBottom: theme.spacing(4),
-      borderRadius: theme.shape.borderRadius * 2,
+      borderRadius: 10,
       boxShadow: theme.shadows[3],
     },
     media: {
@@ -44,10 +44,10 @@ const NewsCard = ({ imageUrl, title, description, newsLink }) => {
 
       {/* Right side: Text */}
       <CardContent className={classes.content}>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h2" style={{color: 'black'}}>
           {title}
         </Typography>
-        <Typography variant="body2" className={classes.description}>
+        <Typography variant="body2" className={classes.description} style={{color: 'black'}}>
           {description}
         </Typography>
 

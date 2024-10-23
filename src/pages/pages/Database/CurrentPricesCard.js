@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Box } from '@material-ui/core';
-import { Icon } from '@iconify/react';
 import btcImage from '../../../images/btc.png';
 import ethImage from '../../../images/eth.png';
 import adaImage from '../../../images/ada.png';
@@ -41,18 +40,17 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
         <Typography variant="h6" gutterBottom>
           Favorite Tokens
         </Typography>
-        <Typography variant="body2" gutterBottom>
+        <Typography variant="body2" gutterBottom style={{marginBottom: 30}}>
         Last 24hs.
         </Typography>
 
         {/* Loop through favorite tokens */}
         {favoriteTokens.length > 0 ? (
-          <Grid container spacing={2}>
+          <Grid container spacing={5}>
             {favoriteTokens.map((token) => {
               const { price, change } = tokenPrices[token];
               const isPositiveChange = change.startsWith('+');
-              const iconColor = isPositiveChange ? 'rgba(45, 177, 23, 1)' : 'rgba(231, 48, 81, 1)';
-              const iconBackgroundColor = isPositiveChange ? 'rgba(213, 239, 209, 1)' : 'rgba(253, 229, 233, 1)';
+              const changeColor = isPositiveChange ? 'green' : 'red';
 
               return (
                 <Grid item key={token} xs={12} sm={6}>
@@ -61,41 +59,22 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
                       <img
                         src={tokenImages[token]} // Display token image
                         alt={token}
-                        style={{ width: 40, height: 40 }}
+                        style={{ width: 50, height: 50, marginRight: 10 }}
                       />
                     </Grid>
                     <Grid item>
                       <Typography variant="h6">{token}</Typography>
-                      <Typography variant="body1">{price}</Typography>
-                      <Box display="flex" alignItems="center" mt={1}>
-                        <Box
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          borderRadius="50%"
-                          width={24} 
-                          height={24}  
-                          style={{ backgroundColor: iconBackgroundColor }}
-                        >
-                          <Icon
-                            width={12} 
-                            height={12}  
-                            icon={isPositiveChange ? 'eva:trending-up-fill' : 'eva:trending-down-fill'}
-                            style={{ color: iconColor }}
-                          />
-                        </Box>
+                        <Typography variant="body2">{price}</Typography>
                         <Typography
                           variant="body2"
                           style={{
                             color: isPositiveChange ? 'green' : 'red',
                             fontWeight: 500,
-                            marginLeft: '4px',  // Reduce space between icon and text
-                            fontSize: '0.85rem' // Slightly smaller text size
+                            fontSize: '0.85rem', // Slightly smaller text size
                           }}
                         >
                           {change}
                         </Typography>
-                      </Box>
                     </Grid>
                   </Grid>
                 </Grid>

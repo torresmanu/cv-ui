@@ -51,9 +51,62 @@ a {
 }
 
 /* CardStyles.css */
-
 .customCard {
-  border-radius: 25px;
+  border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1;
+  background-color: #1C1C1C;
+  padding: 20px;
+}
+
+/* Button styles for all buttons */
+.MuiButton-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0.9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.MuiButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+/* Global Typography styles for h6 and body2 */
+.MuiTypography-h6 {
+  font-weight: bold;  /* Make h6 bold */
+}
+
+.MuiTypography-body2 {
+  font-weight: 300;  /* Make body2 thinner */
+}
+
+/* Typography global color */
+.MuiTypography-root {
+  color: white;
+}
+
+/* Specific button styling for selected token */
+.selectedToken {
+  background-color: #1976d2 !important;
+  border-radius: 20px;
+}
+
+/* Custom styles for the Plotly mode bar */
+.plotly .modebar {
+  background-color: rgba(50, 50, 50, 0) !important; /* Set a semi-transparent background */
+  color: white !important; /* Set the color of icons/text to white */
+}
+
+/* Optional: Style individual buttons in the mode bar */
+.plotly .modebar-btn {
+  background-color: rgba(50, 50, 50, 0) !important; /* Semi-transparent background for buttons */
+  color: white !important; /* Set button icon color to white */
+}
+
+/* Hover effect for buttons */
+.plotly .modebar-btn:hover {
+  background-color: rgba(255, 255, 255, 0) !important; /* Lighten the button background on hover */
 }

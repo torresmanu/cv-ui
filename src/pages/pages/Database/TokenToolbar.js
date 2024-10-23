@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid, IconButton, Typography, Box } from '@material-ui/core';
-import { Star, StarBorder } from '@material-ui/icons'; // Star icons for favorite
+import { Grid, Button, Typography } from '@material-ui/core';
 import btcImage from '../../../images/btc.png';
 import ethImage from '../../../images/eth.png';
 import adaImage from '../../../images/ada.png';
@@ -22,32 +21,33 @@ const tokenImages = {
   SOL: solImage,
 };
 
-const TokenToolbar = ({ selectedToken, onTokenChange, favoriteTokens, setFavoriteTokens }) => {
+const TokenToolbar = ({ selectedToken, onTokenChange }) => {
   const availableTokens = Object.keys(tokenImages);
-
 
   return (
     <div>
-      {/* Token Selection as icons */}
       <Grid container spacing={2} style={{ marginBottom: '20px', marginTop: '20px' }}>
         {availableTokens.map((token) => (
           <Grid item key={token}>
-            <IconButton onClick={() => onTokenChange(token)}>
+            <Button
+              onClick={() => onTokenChange(token)}
+              className={selectedToken === token ? 'selectedToken' : ''}
+            >
               <img
                 src={tokenImages[token]} // Use the token image for each button
                 alt={token}
                 style={{
-                  width: 40,
-                  height: 40,
-                  border: selectedToken === token ? '2px solid #1976d2' : 'none', // Highlight selected token
-                  borderRadius: '50%', // Make it circular
+                  width: 20,
+                  height: 20,
+                  borderRadius: '50%', // Keep the image circular
                 }}
               />
-            </IconButton>
-            <Typography variant="caption" align="center">{token}</Typography> {/* Label below each icon */}
+              <Typography variant="caption" align="center" style={{ marginLeft: '10px', marginRight: '10px' }}>
+                {token}
+              </Typography>
+            </Button>
           </Grid>
         ))}
-
       </Grid>
     </div>
   );

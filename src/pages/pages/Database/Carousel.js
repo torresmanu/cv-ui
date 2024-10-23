@@ -20,12 +20,13 @@ const CarouselContainer = styled.div`
   background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(10px);
   position: relative;
+  padding: 20px;
 `;
 
 const CarouselContent = styled.div`
   display: inline-block;
   padding: 10px 0;
-  animation: ${scrollAnimation} ${({ duration }) => duration*100}s linear infinite;
+  animation: ${scrollAnimation} ${({ duration }) => duration * 100}s linear infinite;
   display: flex;
   align-items: center;
   width: 100%;
@@ -35,6 +36,7 @@ const TweetContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 50px;
+  color: white; /* Set text to white */
 `;
 
 const Avatar = styled.img`
@@ -46,26 +48,25 @@ const Avatar = styled.img`
 
 // Tweets data (hardcoded)
 const tweets = [
-  { username: 'ElonMusk', text: 'This is a sample tweet about crypto markets.', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
-  { username: 'CryptoUser', text: 'Breaking news! Crypto is going up fast! Stay tuned.', avatar: 'https://randomuser.me/api/portraits/men/3.jpg' },
-  { username: 'finance', text: 'CryptoVoice predicts that BTC will rise by 5%.', avatar: 'https://randomuser.me/api/portraits/women/3.jpg' },
-  { username: 'Binance', text: 'Here’s my analysis on ETH. Let’s see what happens next.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' },
-  { username: 'iLoveUPC', text: 'CryptoVoice TFM is awesome! Take a look at', avatar: 'https://randomuser.me/api/portraits/men/5.jpg' },
-  { username: 'CryptoUser', text: 'Breaking news! Crypto is going up fast! Stay tuned.', avatar: 'https://randomuser.me/api/portraits/men/2.jpg' },
-  { username: 'finance', text: 'CryptoVoice predicts that BTC will rise by 5%.', avatar: 'https://randomuser.me/api/portraits/women/1.jpg' },
-  { username: 'Binance', text: 'Here’s my analysis on ETH. Let’s see what happens next.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' }
-];
+    { username: 'ElonMusk', text: 'This is a sample tweet about crypto markets.', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
+    { username: 'CryptoUser', text: 'Breaking news! Crypto is going up fast! Stay tuned.', avatar: 'https://randomuser.me/api/portraits/men/3.jpg' },
+    { username: 'finance', text: 'CryptoVoice predicts that BTC will rise by 5%.', avatar: 'https://randomuser.me/api/portraits/women/3.jpg' },
+    { username: 'Binance', text: 'Here’s my analysis on ETH. Let’s see what happens next.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' },
+    { username: 'iLoveUPC', text: 'CryptoVoice TFM is awesome! Take a look at', avatar: 'https://randomuser.me/api/portraits/men/5.jpg' },
+    { username: 'CryptoUser', text: 'Breaking news! Crypto is going up fast! Stay tuned.', avatar: 'https://randomuser.me/api/portraits/men/2.jpg' },
+    { username: 'finance', text: 'CryptoVoice predicts that BTC will rise by 5%.', avatar: 'https://randomuser.me/api/portraits/women/1.jpg' },
+    { username: 'Binance', text: 'Here’s my analysis on ETH. Let’s see what happens next.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' }
+  ];
 
 const Carousel = () => {
   const carouselContentRef = useRef(null);
   const [animationDuration, setAnimationDuration] = useState(45); // Initial duration
 
   useEffect(() => {
-    // Adjust the animation duration based on the content width
     if (carouselContentRef.current) {
       const contentWidth = carouselContentRef.current.scrollWidth;
       const viewportWidth = carouselContentRef.current.parentElement.offsetWidth;
-      const speedPerPixel = 0.05; // Adjust this value to control speed
+      const speedPerPixel = 0.05;
       const calculatedDuration = (contentWidth / viewportWidth) * speedPerPixel;
       setAnimationDuration(calculatedDuration);
     }
@@ -73,30 +74,30 @@ const Carousel = () => {
 
   return (
     <CarouselContainer>
-    <CarouselContent ref={carouselContentRef} duration={animationDuration}>
+      <CarouselContent ref={carouselContentRef} duration={animationDuration}>
         {[...tweets, ...tweets].map((tweet, index) => (
-        <Tooltip 
+          <Tooltip 
             key={index} 
             title={`Go to @${tweet.username} account on X (Twitter)`} 
-            arrow  // Optional: adds an arrow to the tooltip
-            placement="top"  // Position the tooltip at the top
-        >
+            arrow
+            placement="top"
+          >
             <a 
-            href={`https://twitter.com/${tweet.username}`}  // Link to the Twitter profile
-            target="_blank"  // Opens in a new tab
-            rel="noopener noreferrer"  // For security reasons
-            style={{ textDecoration: 'none', color: 'inherit' }}  // No underline, inherit text color
+              href={`https://twitter.com/${tweet.username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none', color: 'inherit' }} // Inherit white text color
             >
-            <TweetContainer>
+              <TweetContainer>
                 <Avatar src={tweet.avatar} alt={`${tweet.username} avatar`} />
                 <span>
-                <strong>@{tweet.username}</strong>: {tweet.text.slice(0, 100)}...
+                  <strong>@{tweet.username}</strong>: {tweet.text.slice(0, 100)}...
                 </span>
-            </TweetContainer>
+              </TweetContainer>
             </a>
-        </Tooltip>
+          </Tooltip>
         ))}
-    </CarouselContent>
+      </CarouselContent>
     </CarouselContainer>
   );
 };

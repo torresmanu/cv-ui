@@ -13,7 +13,7 @@ import {
 import { Menu as MenuIcon } from "@material-ui/icons";
 
 // Add your logo here
-import logo from "../images/Logo4.png"; // Import your app logo
+import logo from "../images/Logo.png"; // Import your app logo
 
 const AppBar = styled(MuiAppBar)`
   background: ${props => props.theme.header.background};
@@ -29,7 +29,7 @@ const IconButton = styled(MuiIconButton)`
 `;
 
 const Logo = styled.img`
-  width: 100px;
+  width: 130px;
   height: auto;
 `;
 
@@ -44,21 +44,9 @@ const Header = ({ onDrawerToggle }) => (
     <AppBar position="sticky" elevation={0}>
       <Toolbar>
         <Grid container alignItems="center" justifyContent="space-between">
-          {/* Left side - Drawer Toggle */}
-          <Grid item xs={4}>
-            <Hidden smDown>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={onDrawerToggle}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
-          </Grid>
 
           {/* Center - Logo */}
-          <Grid item xs={4} container justifyContent="center">
+          <Grid item xs={4} container justifyContent="left">
             <Logo src={logo} alt="App Logo" />
           </Grid>
 
