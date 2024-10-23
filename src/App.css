@@ -75,6 +75,23 @@ a {
 .MuiButton-root:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
+/* Global Button styles */
+.MuiButton-outlined {
+  border-color: white !important; /* Set the border color to white */
+  color: white !important;        /* Set the text color to white */
+}
+
+.MuiButton-outlined:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important; /* Optional: Change background on hover */
+  border-color: white !important; /* Ensure the border color stays white on hover */
+}
+/* Global Typography styles for h1 */
+.MuiTypography-h1 {
+  font-size: 3rem; /* Adjust the size as needed */
+  font-weight: bold; /* Make it bold */
+  margin-bottom: 20px; /* Add 20px margin to the bottom */
+}
+
 /* Global Typography styles for h6 and body2 */
 .MuiTypography-h6 {
   font-weight: bold;  /* Make h6 bold */

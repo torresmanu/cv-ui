@@ -149,17 +149,16 @@ const Dashboard = () => {
             borderRadius: 20,
             opacity: 0.9,
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-            marginRight: 10,
           }}
         >
           <Star style={{ color: '#ffffff', width: 26, height: 26 }} />
         </IconButton>
 
-        <Button variant="contained" color="primary" onClick={handleOpenAlertModal} startIcon={<NotificationsIcon />}>
+        <Button variant="outlined" color="primary" onClick={handleOpenAlertModal} startIcon={<NotificationsIcon />}>
           Create Alert
         </Button>
 
-        <Button variant="contained" color="primary" onClick={downloadCSV} startIcon={<GetAppIcon />}>
+        <Button variant="outlined" color="primary" onClick={downloadCSV} startIcon={<GetAppIcon />}>
           Download CSV Data
         </Button>
       </Grid>
@@ -175,14 +174,6 @@ const Dashboard = () => {
         <Box>
           <FearGreedIndicator value={65} />
         </Box>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Carousel />
-      </Grid>
-
-      <Grid item xs={12}>
-        <NewsSection />
       </Grid>
 
       <Dialog open={openAlertModal} onClose={handleCloseAlertModal} fullWidth maxWidth="sm" PaperProps={{

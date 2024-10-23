@@ -1,67 +1,41 @@
 import React from 'react';
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import btcNews from '../../../images/btc_news.webp'
-
-const useStyles = makeStyles((theme) => ({
-    newsCard: {
-      display: 'flex',
-      width: '100%',
-      marginBottom: theme.spacing(4),
-      borderRadius: 10,
-      boxShadow: theme.shadows[3],
-    },
-    media: {
-      width: '33%', // 1/3 of the card for the image
-      minHeight: 300,
-    },
-    content: {
-      padding: theme.spacing(8),
-      flex: '1',
-      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5))', // Added gradient
-      color: 'black'
-    },
-    description: {
-      marginTop: theme.spacing(8),
-      color: 'black',
-    },
-    button: {
-      marginTop: theme.spacing(8),
-    },
-  }));
+import btcNews from '../../../images/Bitcoin_modern.png'
 
 const NewsCard = ({ imageUrl, title, description, newsLink }) => {
-  const classes = useStyles();
-
   return (
-    <Card className={classes.newsCard}>
-      {/* Left side: Image */}
-      <CardMedia
-        className={classes.media}
-        image={imageUrl}
-        title={title}
-      />
-
-      {/* Right side: Text */}
-      <CardContent className={classes.content}>
-        <Typography variant="h5" component="h2" style={{color: 'black'}}>
-          {title}
-        </Typography>
-        <Typography variant="body2" className={classes.description} style={{color: 'black'}}>
-          {description}
-        </Typography>
-
-        <Button
-          className={classes.button}
-          variant="text"
-          color="primary"
-          href={newsLink}
-          target="_blank"
-        >
-          Read More
-        </Button>
-      </CardContent>
-    </Card>
+    <Card className="customCard">
+    <CardContent>
+        <Grid container spacing={5}>
+              <Grid item  xs={12}>
+                <Grid container alignItems="center" spacing={2}>
+                  <Grid item md={5} xs={12}>
+                  <img
+                        src={btcNews} // Display token image
+                        alt="bitcoin_news"
+                      />
+                  </Grid>
+                  <Grid item md={7} xs={12}>
+                    <Typography variant="h6" style={{ marginBottom: '20px' }}>
+                      {title}
+                    </Typography>
+                    <Typography variant="body2">
+                        {description}
+                    </Typography>
+                    <Button 
+                      variant="outlined" 
+                      onClick={() => window.open(newsLink, '_blank', 'noopener,noreferrer')}
+                      style={{ padding: '0px 50px', height:'31px', marginTop: '30px' }} // Adjust padding as needed
+                    >
+                      Read More
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+        </Grid>
+    </CardContent>
+  </Card>
   );
 };
 

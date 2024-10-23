@@ -20,7 +20,7 @@ const CarouselContainer = styled.div`
   background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(10px);
   position: relative;
-  padding: 80px;
+  margin-bottom: 30px;
 `;
 
 const CarouselContent = styled.div`

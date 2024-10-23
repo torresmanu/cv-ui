@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import '../../../App.css';
+import NewsSection from './NewsSection';
+import Carousel from './Carousel';
 
 // Material UI
 import {
   Grid,
-  Button,
   Typography,
-  Divider,
-  Card,
-  CardContent,
 } from '@material-ui/core';
 
 // Project files
-import step1 from '../../../images/step1.png';
-import step2 from '../../../images/step2.png';
-import { StepTab } from '../../../components/StepTab';
-import { DBService } from '../../../services/DBService';
 import { copyJSONToClipboard } from '../../../utils/copyToClipboard';
-import AppliedFilters from './AppliedFilters';
-import FilterSelection from './FiltersSelection';
-import Skeleton from '@material-ui/lab/Skeleton';
 import AccessDenied from '../../../components/AccessDenied';
 
 // Import actions from Redux slice
@@ -36,10 +27,7 @@ function Database() {
   // Access Redux state
   const {
     appliedFilters,
-    filtersToRender,
     accessDenied,
-    isLoading,
-    searchDisable,
   } = useSelector((state) => state.filters);
 
   // Local state variables
@@ -61,16 +49,6 @@ function Database() {
     setResultsLoading(true);
     window.scroll(0, document.body.scrollHeight/3);
 
-    DBService.search(jsonAppliedFilters)
-      .then((data) => {
-        setResultCount([data.evaluations.length, data.subjects.length]);
-        setEvaluationsData(data.evaluations);
-        setSubjectsData(data.subjects);
-        setResultsLoading(false);
-      })
-      .catch(() => {
-        setResultsLoading(false);
-      });
   };
 
   const handleClearFilters = () => {
@@ -84,7 +62,16 @@ function Database() {
 
   return !accessDenied ? (
     <Grid container spacing={3}>
-          <Dashboard evaluations={evaluationsData} subjects={subjectsData} handleCopyFilters={handleCopyFilters}/>
+      <Typography variant="h1" gutterBottom>
+        CryptoVoice Dashboard
+      </Typography>
+      <Dashboard evaluations={evaluationsData} subjects={subjectsData} handleCopyFilters={handleCopyFilters}/>
+      <Typography variant="h1" gutterBottom style={{marginTop: "70px", marginBottom: "40px"}}>
+        Crypto News Spotlight
+      </Typography>
+      <Carousel />
+      <NewsSection />
+
     </Grid>
   ) : (
     <AccessDenied />
