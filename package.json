@@ -2,14 +2,16 @@
   "name": "CryptoVoice",
   "version": "0.0.1",
   "private": true,
-  "homepage": "",
+  "homepage": "https://torresmanu.github.io/cv-ui",
   "scripts": {
     "start": "REACT_APP_API_URL=https: react-scripts start",
     "start:local": "env-cmd -e development react-scripts start",
     "start:sg": "env-cmd -e sg react-scripts start",
     "build:dev": "REACT_APP_API_URL=https:// react-scripts build",
-    "build": "REACT_APP_API_URL=https://react-scripts build",
-    "build:demo": "REACT_APP_API_URL=https:// react-scripts build"
+    "build": "REACT_APP_API_URL=https:// react-scripts build",
+    "build:demo": "REACT_APP_API_URL=https:// react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,6 +75,7 @@
     "styled-components": "4.4.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "gh-pages": "^6.2.0"
   }
 }
