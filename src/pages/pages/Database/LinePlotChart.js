@@ -98,9 +98,9 @@ const LinePlotChart = ({ selectedToken }) => {
               bordercolor: 'rgba(255,255,255,0.2)', // Optional border color
             },
             hovertemplate: groupByDay ? 
-              '<b>%{x|%b %d, %Y}</b><br><span style="color:white">%{y}</span><extra></extra>'
+              '<b>%{x|%b %d, %Y}</b><br><span style="color:white">$%{y}</span><extra></extra>'
               :
-              '<b>%{x}</b><br><span style="color:white">%{y}</span><extra></extra>',
+              '<b>%{x}</b><br><span style="color:white">$%{y}</span><extra></extra>',
           },
           {
             x: groupByDay
@@ -121,9 +121,9 @@ const LinePlotChart = ({ selectedToken }) => {
               bordercolor: 'rgba(255,255,255,0.2)', // Optional border color
             },
             hovertemplate: groupByDay ? 
-              '<b>%{x|%b %d, %Y}</b><br><span style="color:white">%{y}</span><extra></extra>'
+              '<b>%{x|%b %d, %Y}</b><br><span style="color:white">$%{y}</span><extra></extra>'
               :
-              '<b>%{x}</b><br><span style="color:white">%{y}</span><extra></extra>',
+              '<b>%{x}</b><br><span style="color:white">$%{y}</span><extra></extra>',
           }
         ]}
         layout={{
@@ -141,7 +141,7 @@ const LinePlotChart = ({ selectedToken }) => {
           },
           yaxis: {
             title: {
-              text: 'Price',
+              text: 'Price (USD)',
               font: {
                 color: 'white',
               },
