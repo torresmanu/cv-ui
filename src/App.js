@@ -35,7 +35,7 @@ const ConnectedApp = connect(store => ({ theme: store.themeReducer }))(App);
 
 function AppWithRouter() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <ConnectedApp/>
     </Router>
   );
