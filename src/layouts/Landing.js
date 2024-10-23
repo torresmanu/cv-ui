@@ -42,7 +42,7 @@ function Landing({ children }) {
           <Typography variant="caption" component="p">
             © All rights reserved
             <br /> made by &nbsp;
-            <Link href="https://instagram.com/snow.match?igshid=YmMyMTA2M2Y=">CryptoVoice</Link>
+            <Link href="https://linkedin.com">CryptoVoice</Link>
           </Typography>
         </Container>
       </Box>

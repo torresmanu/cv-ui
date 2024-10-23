@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'; // For navigation in react-router-dom v5
 import { Box, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import logo from '../../../images/logo_simple.svg';
+import logo from '../../../images/Logo_blanco_simple.png';
 
 const useStyles = makeStyles((theme) => ({
   heroContainer: {
@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icon: {
-    width: '50px',
-    margin: '20px 0',
+    width: '90px',
+    margin: '10px 0',
   },
 }));
 
