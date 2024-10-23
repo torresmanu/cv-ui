@@ -68,7 +68,7 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
                         <Typography
                           variant="body2"
                           style={{
-                            color: isPositiveChange ? 'green' : 'red',
+                            color: isPositiveChange ? '#4BFF33' : '#FF3333',
                             fontWeight: 500,
                             fontSize: '0.85rem', // Slightly smaller text size
                           }}

@@ -53,7 +53,7 @@ const NewsCard = ({ imageUrl, title, description, newsLink }) => {
 
         <Button
           className={classes.button}
-          variant="contained"
+          variant="text"
           color="primary"
           href={newsLink}
           target="_blank"

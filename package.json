@@ -1,15 +1,15 @@
 {
-  "name": "vmadmin",
-  "version": "1.17.0",
+  "name": "CryptoVoice",
+  "version": "0.0.1",
   "private": true,
-  "homepage": "https://admin.viewmind.ai/",
+  "homepage": "",
   "scripts": {
-    "start": "REACT_APP_API_URL=https://devapi.viewmind.net/ react-scripts start",
+    "start": "REACT_APP_API_URL=https: react-scripts start",
     "start:local": "env-cmd -e development react-scripts start",
     "start:sg": "env-cmd -e sg react-scripts start",
-    "build:dev": "REACT_APP_API_URL=https://devapi.viewmind.net/ react-scripts build",
-    "build": "REACT_APP_API_URL=https://api.viewmind.ai/ react-scripts build",
-    "build:demo": "REACT_APP_API_URL=https://demoapi.viewmind.ai/ react-scripts build"
+    "build:dev": "REACT_APP_API_URL=https:// react-scripts build",
+    "build": "REACT_APP_API_URL=https://react-scripts build",
+    "build:demo": "REACT_APP_API_URL=https:// react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"

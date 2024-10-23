@@ -209,7 +209,7 @@ function AddUserForm({
         <Grid container style={{marginTop: 30}}>
           <Grid item xs={12} sm={12}>
             <FormControlLabel
-              label={'ViewMind Portal'}
+              label={' Portal'}
               control={<Checkbox
                 id={'portal_access'}
                 value={1}
@@ -222,7 +222,7 @@ function AddUserForm({
           </Grid>
           <Grid item xs={12} sm={12}>
             <FormControlLabel
-              label={'ViewMind Administration'}
+              label={' Administration'}
               control={<Checkbox
                 id={'admin_access'}
                 value={4}
@@ -235,7 +235,7 @@ function AddUserForm({
           </Grid>
           <Grid item xs={12} sm={12}>
             <FormControlLabel
-              label={'ViewMind Distribution'}
+              label={' Distribution'}
               control={<Checkbox
                 id={'dist_access'}
                 value={4}

@@ -33,6 +33,3 @@ API.interceptors.response.use(
   }
 );
 
-
-// dev api: ' https://devapi.viewmind.net/'
-// prod api: 'https://eu-api.viewmind.ai/'

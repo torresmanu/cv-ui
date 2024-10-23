@@ -103,7 +103,7 @@ function ForgotPassword() {
   return (
     <>
     <LogoContainer>
-      <Link href="https://portal.viewmind.net/auth/sign-in">
+      <Link href="https://">
         <Logo logo={logo} padding={'10px'} width={'150px'} /> 
       </Link>
     </LogoContainer>
@@ -123,7 +123,7 @@ function ForgotPassword() {
         </Typography>
         <Button
           component={Link}
-          href="https://portal.viewmind.net/auth/sign-in" //it always goes to medical portal login
+          href="https://" //it always goes to medical portal login
           fullWidth
           variant="contained"
           color="primary"

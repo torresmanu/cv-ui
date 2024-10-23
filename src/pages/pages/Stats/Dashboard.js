@@ -131,27 +131,13 @@ export default function Dashboard (){
   const distinctInstitutions = new Set();
   const distinctPreviousInstitutions = new Set();
 
-  const institutionsToFilter = [
-    1, //"ViewMind Dev (EU) - (1)",
-    35, //"Functional Control (EU) - (35)",
-    39, //"ViewMind EU Events (EU) - (39)",
-    34, //"Testing Institution (EU) - (34)",
-    29, //"Axxion (EU) - (29)",
-    38, //"ViewMind US Events (US) - (38)",
-    19, //"ViewMind Dev (US) - (19)",
-    17, //"ViewMindDev (SG) - (17)"
-  ];
 
   useEffect(
     () => {
       KPIService.getMasterEvaluations("undefined").then((data) => {
         //We filter data so that we don't count the evaluations of the institutions that are not real comercial institutions
         const filteredData = [];
-        data.forEach((item) => { 
-          if (!institutionsToFilter.includes(item?.institution_id)) {
-            filteredData.push(item);
-          }
-        });
+
         
         setResponseData(filteredData);
         filteredData.forEach((item) => { 

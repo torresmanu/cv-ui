@@ -61,7 +61,7 @@ const canSeeMasterList = permissions ? permissions['portal_users']?.find((perm)=
 const homeRoutes = {
   id: "Home",
   path: "/",
-  component: OnBoard,
+  component: Home,
   children: null,
   hidden: true
 };
@@ -229,17 +229,15 @@ const landingRoutes = {
 
 
 export const dashboard = [
-  homeRoutes,
   accountRoutes,
   DatabaseRoutes
 ];
 
 export const auth = [authRoutes];
 
-export const landing = [landingRoutes];
+export const landing = [landingRoutes, homeRoutes];
 
 export default [
-  homeRoutes,
   accountRoutes,
   DatabaseRoutes
 ];

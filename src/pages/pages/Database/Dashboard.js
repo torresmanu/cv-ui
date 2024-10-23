@@ -138,25 +138,25 @@ const Dashboard = () => {
         />
       </Grid>
 
-      <Grid item xs={12} md={4} className={classes.buttonContainer}>
-      <IconButton
-        onClick={handleFavoriteToggle}
-        aria-label="favorite"
-        style={{
-          backgroundColor: favoriteTokens.includes(selectedToken) ? '#196CBF' : 'rgba(255, 255, 255, 0.1)',  // Matching background
-          padding: 5,  // Keep padding as is to maintain the button size
-          borderRadius: 20, // Match the rounded button style
-          opacity: 0.9, // Set opacity like the buttons
-          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', // Add a shadow for depth
-          marginRight: 10,
-        }}
-      >
-        {favoriteTokens.includes(selectedToken) ? (
-          <Star style={{ color: '#ffffff', width: 26, height: 26 }} /> 
-        ) : (
-          <Star style={{ color: '#ffffff', width: 24, height: 24 }} /> 
-        )}
-      </IconButton>
+      <Grid item xs={12} md={4} className={classes.buttonContainer} fullWidth>
+        <IconButton
+          onClick={handleFavoriteToggle}
+          aria-label="favorite"
+          style={{
+            backgroundColor: favoriteTokens.includes(selectedToken) ? '#196CBF' : 'rgba(255, 255, 255, 0.1)',  // Matching background
+            padding: 5,  // Keep padding as is to maintain the button size
+            borderRadius: 20, // Match the rounded button style
+            opacity: 0.9, // Set opacity like the buttons
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', // Add a shadow for depth
+            marginRight: 10,
+          }}
+        >
+          {favoriteTokens.includes(selectedToken) ? (
+            <Star style={{ color: '#ffffff', width: 26, height: 26 }} /> 
+          ) : (
+            <Star style={{ color: '#ffffff', width: 24, height: 24 }} /> 
+          )}
+        </IconButton>
 
         <Button variant="contained" color="primary" onClick={handleOpenAlertModal} startIcon={<NotificationsIcon />}>
           Create Alert

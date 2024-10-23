@@ -13,6 +13,5 @@ const API = axios.create({
     "LoginType": 4
   }
 });
-// dev api: 'https://devapi.viewmind.net/'
-// prod api: 'https://eu-api.viewmind.ai/'
+
 export default API;
