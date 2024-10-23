@@ -66,6 +66,8 @@ const MainContent = styled(Paper)`
   
   ${props => props.theme.breakpoints.up("md")} {
     max-width: calc(100vw);
+    padding-left: 8vw;
+    padding-right: 8vw;
   }
  
 

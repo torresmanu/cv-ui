@@ -18,7 +18,7 @@ const FearGreedIndicator = ({ value }) => {
         Fear & Greed Index
         </Typography>
         <Typography variant="body2" gutterBottom style={{marginBottom: 30}}>
-        This index is calculated using news and social media data.
+          Powered by CryptoVoice classification model
         </Typography>
           <Grid container spacing={5}>
                 <Grid item  xs={12} sm={6}>

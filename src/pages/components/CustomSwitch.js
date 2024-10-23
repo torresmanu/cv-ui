@@ -42,7 +42,7 @@ const CustomSwitch = ({ groupByDay, setGroupByDay }) => {
   return (
     <Typography component="div">
       <Grid component="label" container alignItems="center" spacing={5}>
-        <Grid item>Hour</Grid>
+        <Grid item>Hourly</Grid>
         <Grid item>
           <AntSwitch
             checked={groupByDay}
@@ -50,7 +50,7 @@ const CustomSwitch = ({ groupByDay, setGroupByDay }) => {
             name="groupByDay"
           />
         </Grid>
-        <Grid item>Day</Grid>
+        <Grid item>Daily</Grid>
       </Grid>
     </Typography>
   );

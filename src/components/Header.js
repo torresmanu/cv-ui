@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { withTheme } from "styled-components";
 import { connect } from "react-redux";
 import {
   Grid,
-  Hidden,
   AppBar as MuiAppBar,
   IconButton as MuiIconButton,
   Toolbar,
   Avatar,
-  Typography
+  Typography,
+  Popover,
+  MenuItem,
 } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { useHistory } from 'react-router-dom'; // For navigation in react-router-dom v5
 
 // Add your logo here
 import logo from "../images/Logo.png"; // Import your app logo
 
 const AppBar = styled(MuiAppBar)`
-  background: ${props => props.theme.header.background};
+  background: rgba(28, 28, 28, 0.1);  /* Darker background with some transparency */
   color: ${props => props.theme.header.color};
   box-shadow: ${props => props.theme.shadows[1]};
+  backdrop-filter: blur(10px); /* Apply blur effect */
 `;
 
-const IconButton = styled(MuiIconButton)`
-  svg {
-    width: 22px;
-    height: 22px;
+const HeaderContainer = styled.div`
+
+  
+  ${props => props.theme.breakpoints.up("md")} {
+    padding-left: 7vw;   // Apply same padding for left
+    padding-right: 8vw;  // Apply same padding for right
   }
 `;
 
@@ -39,28 +43,79 @@ const ProfileSection = styled.div`
   gap: 15px;
 `;
 
-const Header = ({ onDrawerToggle }) => (
-  <React.Fragment>
-    <AppBar position="sticky" elevation={0}>
-      <Toolbar>
-        <Grid container alignItems="center" justifyContent="space-between">
+const Header = ({ onDrawerToggle }) => {
+  // State for managing the popover
+  const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();  // Initialize useHistory for navigation
 
-          {/* Center - Logo */}
-          <Grid item xs={4} container justifyContent="left">
-            <Logo src={logo} alt="App Logo" />
-          </Grid>
+  // Open the popover
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-          {/* Right side - Profile section */}
-          <Grid item xs={4} container justifyContent="flex-end">
-            <ProfileSection>
-              <Typography variant="body1">Hello, User</Typography>
-              <Avatar alt="User Name" src="/path-to-avatar-image.jpg" /> {/* Replace with user data */}
-            </ProfileSection>
+  // Close the popover
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    history.push('/');  // Redirect to dashboard
+  }
+
+  return (
+    <React.Fragment>
+      <AppBar position="sticky" elevation={0}>
+        <HeaderContainer>
+        <Toolbar>
+          <Grid container alignItems="center" justifyContent="space-between">
+            {/* Center - Logo */}
+            <Grid item xs={4} container justifyContent="left">
+              <Logo src={logo} alt="App Logo" />
+            </Grid>
+
+            {/* Right side - Profile section */}
+            <Grid item xs={4} container justifyContent="flex-end">
+              <ProfileSection>
+                <Typography variant="body1">Hello, User</Typography>
+                <Avatar
+                  alt="User Name"
+                  src="/path-to-avatar-image.jpg" // Replace with the actual path to user avatar
+                  onClick={handleMenuOpen} // Open menu on click
+                  style={{ cursor: "pointer" }}
+                />
+              </ProfileSection>
+
+              {/* Popover component */}
+              <Popover
+                open={Boolean(anchorEl)}
+                anchorEl={anchorEl}
+                onClose={handleMenuClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                PaperProps={{
+                  style: {
+                    minWidth: "200px", // Adjust width of popover
+                    padding: '10px',    // Optional padding for better spacing
+                  },
+                }}
+              >
+                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Princing</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem> {/* Logout option */}
+              </Popover>
+            </Grid>
           </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-  </React.Fragment>
-);
+        </Toolbar>
+        </HeaderContainer>
+      </AppBar>
+    </React.Fragment>
+  );
+};
 
 export default connect()(withTheme(Header));
