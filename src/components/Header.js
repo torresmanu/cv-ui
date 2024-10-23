@@ -17,9 +17,8 @@ import { useHistory } from 'react-router-dom'; // For navigation in react-router
 import logo from "../images/Logo.png"; // Import your app logo
 
 const AppBar = styled(MuiAppBar)`
-  background: rgba(28, 28, 28, 0.1);  /* Darker background with some transparency */
+  background: rgba(30, 35, 41, 0.1);  /* Darker background with some transparency */
   color: ${props => props.theme.header.color};
-  box-shadow: ${props => props.theme.shadows[1]};
   backdrop-filter: blur(10px); /* Apply blur effect */
 `;
 

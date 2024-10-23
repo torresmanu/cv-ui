@@ -21,7 +21,7 @@ const FearGreedIndicator = ({ value }) => {
           Powered by CryptoVoice classification model
         </Typography>
           <Grid container spacing={5}>
-                <Grid item  xs={12} sm={6}>
+                <Grid item  xs={12}>
                   <Grid container alignItems="center" spacing={2}>
                     <Grid item>
                       <Icon

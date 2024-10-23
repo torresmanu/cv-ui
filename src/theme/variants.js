@@ -49,7 +49,7 @@ const darkVariant = {
     }
   },
   body: {
-    background: "linear-gradient(180deg, #121212, #1C1B1B)",  // Corrected gradient string
+    background: "linear-gradient(180deg, #181A1F, #1C1B1B)",  // Corrected gradient string
   }
 };
 
