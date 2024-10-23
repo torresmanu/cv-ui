@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Switch, FormControlLabel } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import Plot from 'react-plotly.js';
 import Papa from 'papaparse';
 import CustomSwitch from '../../components/CustomSwitch';
 
+const tokenColors = {
+  BTC: '#F7931A',
+  ETH: '#627EEA',
+  ADA: '#0033AD',
+  LINK: '#2A5ADA',
+  LTC: '#345D9D',
+  BNB: '#F3BA2F',
+  MATIC: '#8247E5',
+  SOL: '#00FFA3',
+};
+
 const LinePlotChart = ({ selectedToken }) => {
   const [dataByToken, setDataByToken] = useState({});
-  const [groupByDay, setGroupByDay] = useState(true); // State to toggle between group by day and hourly
+  const [groupByDay, setGroupByDay] = useState(true);
 
   const loadCSVData = () => {
     fetch(`${process.env.PUBLIC_URL}/data.csv`)
-      .then(response => response.text())
-      .then(csvText => {
+      .then((response) => response.text())
+      .then((csvText) => {
         Papa.parse(csvText, {
           header: true,
           dynamicTyping: true,
           complete: (results) => {
             const tokenMap = {};
-            results.data.forEach(row => {
+            results.data.forEach((row) => {
               if (row.Token && row.Real_price && row.Prediction_Ensemble) {
                 const date = new Date(row.Fecha);
                 if (!tokenMap[row.Token]) tokenMap[row.Token] = [];
@@ -29,12 +40,11 @@ const LinePlotChart = ({ selectedToken }) => {
               }
             });
             setDataByToken(tokenMap);
-          }
+          },
         });
       });
   };
 
-  // Function to group data by day and calculate average price and prediction
   const groupByDayAndAverage = (data) => {
     const groupedData = {};
     data.forEach((entry) => {
@@ -64,95 +74,108 @@ const LinePlotChart = ({ selectedToken }) => {
           Real Price vs CryptoVoice Prediction (Token: {selectedToken})
         </Typography>
 
-        {/* Toggle switch to change between "Group by Day" and "Hourly" views */}
         <CustomSwitch groupByDay={groupByDay} setGroupByDay={setGroupByDay} />
       </Box>
-      {/* Plot for the selected token */}
       {selectedToken && dataByToken[selectedToken] && dataByToken[selectedToken].length > 0 ? (
-        <Plot
-          data={[
-            {
-              x: groupByDay
-                ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.date)
-                : dataByToken[selectedToken].map((point) => point.date),
-              y: groupByDay
-                ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.avgRealPrice)
-                : dataByToken[selectedToken].map((point) => point.realPrice),
-              mode: 'lines',
-              type: 'scatter',
-              line: { color: '#035ECE', width: 1 },
-              name: groupByDay ? 'Average Real Price' : 'Real Price',
+      <Plot
+        data={[
+          {
+            x: groupByDay
+              ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.date)
+              : dataByToken[selectedToken].map((point) => point.date),
+            y: groupByDay
+              ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.avgRealPrice)
+              : dataByToken[selectedToken].map((point) => point.realPrice),
+            mode: 'lines',
+            type: 'scatter',
+            line: groupByDay ? { color: 'white', width: 1, dash: 'dash' } : {color: 'white', width: 1},  // Real Price line in dashed style
+            name: groupByDay ? 'Day Average Price' : 'Real Price',
+            hoverlabel: {
+              font: {
+                color: 'white', // Font color for both parts
+              },
+              bgcolor: '#333', // Background for the name part (label)
+              bordercolor: 'rgba(255,255,255,0.2)', // Optional border color
             },
-            {
-              x: groupByDay
-                ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.date)
-                : dataByToken[selectedToken].map((point) => point.date),
-              y: groupByDay
-                ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.avgPredictionEnsemble)
-                : dataByToken[selectedToken].map((point) => point.predictionEnsemble),
-              mode: 'lines',
-              type: 'scatter',
-              line: { color: '#ff7f0e', width: 2 },
-              name: groupByDay ? 'Average Prediction' : 'Prediction',
-            }
-          ]}
-          layout={{
-            xaxis: { 
-              title: 'Date',
-              type: 'date',
-              gridcolor: 'rgba(255, 255, 255, 0.1)',
-              titlefont: {
+            hovertemplate: groupByDay ? 
+              '<b>%{x|%b %d, %Y}</b><br><span style="color:white">%{y}</span><extra></extra>'
+              :
+              '<b>%{x}</b><br><span style="color:white">%{y}</span><extra></extra>',
+          },
+          {
+            x: groupByDay
+              ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.date)
+              : dataByToken[selectedToken].map((point) => point.date),
+            y: groupByDay
+              ? groupByDayAndAverage(dataByToken[selectedToken]).map((point) => point.avgPredictionEnsemble)
+              : dataByToken[selectedToken].map((point) => point.predictionEnsemble),
+            mode: 'lines',
+            type: 'scatter',
+            line: { color: tokenColors[selectedToken], width: 2 },  // Prediction line
+            name: groupByDay ? 'Day Average Prediction' : 'Prediction',
+            hoverlabel: {
+              font: {
+                color: tokenColors[selectedToken], // Font color for both parts
+              },
+              bgcolor: '#333', // Background for the name part (label)
+              bordercolor: 'rgba(255,255,255,0.2)', // Optional border color
+            },
+            hovertemplate: groupByDay ? 
+              '<b>%{x|%b %d, %Y}</b><br><span style="color:white">%{y}</span><extra></extra>'
+              :
+              '<b>%{x}</b><br><span style="color:white">%{y}</span><extra></extra>',
+          }
+        ]}
+        layout={{
+          xaxis: {
+            title: 'Date',
+            type: 'date',
+            gridcolor: 'rgba(255, 255, 255, 0.1)',
+            titlefont: {
+              color: 'white',
+            },
+            tickfont: {
+              color: 'white',
+            },
+            showgrid: false,
+          },
+          yaxis: {
+            title: {
+              text: 'Price',
+              font: {
                 color: 'white',
               },
-              tickfont: {
-                color: 'white',
-              },
-              showgrid: false, // Hides the vertical grid lines
+              standoff: 20,
             },
-            yaxis: { 
-              title: {
-                text: 'Price',
-                font: {
-                  color: 'white',
-                },
-                standoff: 20,  // This adds padding between the title and the axis
-              },
-              gridcolor: 'rgba(255, 255, 255, 0.1)',
-              tickfont: {
-                color: 'white',
-              },
-              tickcolor: 'rgba(255, 255, 255, 0)',  // Set the tick color
-              ticklen: 10,   // Length of the ticks (controls the spacing between grid and tick labels)
-              tickwidth: 0.1,  // Optional: Set tick line width for better visibility
+            gridcolor: 'rgba(255, 255, 255, 0.1)',
+            tickfont: {
+              color: 'white',
             },
-            margin: { t: 30, r: 20, l: 60, b: 70 },
-            autosize: true,
-            height: 500,
-            legend: {
-              orientation: 'h',
-              x: 0.5,
-              xanchor: 'center',
-              y: -0.2,
-              yanchor: 'top',
-              font: { 
-                color: 'white'
-              }
-            },
-            paper_bgcolor: 'rgba(255, 255, 255, 0)',
-            plot_bgcolor: 'rgba(255, 255, 255, 0)',
-          }}
-          useResizeHandler
-          style={{ width: '100%' }}
-          config={{ 
-            modeBarButtonsToRemove: [
-              'resetScale2d', 'zoom2d', 'pan2d', 'select2d', 'lasso2d'
-            ], // Hide specific buttons if needed
-            displaylogo: false, // Hide Plotly logo in the mode bar
-            modeBarStyle: {
-              backgroundColor: 'transparent', // Make the background transparent
-            },
-          }}     
-        />
+            tickcolor: 'rgba(255, 255, 255, 0)',
+            ticklen: 10,
+            tickwidth: 0.1,
+          },
+          margin: { t: 30, r: 20, l: 60, b: 70 },
+          autosize: true,
+          height: 500,
+          legend: {
+            orientation: 'h',
+            x: 0.5,
+            xanchor: 'center',
+            y: -0.2,
+            yanchor: 'top',
+            font: { color: 'white' },
+          },
+          paper_bgcolor: 'rgba(255, 255, 255, 0)',
+          plot_bgcolor: 'rgba(255, 255, 255, 0)',
+        }}
+        useResizeHandler
+        style={{ width: '100%' }}
+        config={{
+          modeBarButtonsToRemove: ['resetScale2d', 'zoom2d', 'pan2d', 'select2d', 'lasso2d'],
+          displaylogo: false,
+        }}
+      />
       ) : (
         <Typography>No data available for the selected token.</Typography>
       )}
