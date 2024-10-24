@@ -10,9 +10,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  body {
-    background: ${props => props.theme.body.background};
-  }
 `;
 
 function Landing({ children }) {
@@ -20,13 +17,42 @@ function Landing({ children }) {
     <React.Fragment>
       <CssBaseline />
       <GlobalStyle />
+      
+      {/* Video background */}
+      <Box sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        zIndex: -9999
+      }}>
+        <video 
+          src="https://framerusercontent.com/assets/zGxK107SsQ760NcmS6Ay6X57skY.mp4" 
+          loop 
+          autoPlay 
+          muted 
+          playsInline
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: '50% 50%'
+          }}
+        />
+      </Box>
+
+      {/* Main Content */}
       {children}
+
       <Box
         sx={{
           py: 5,
           textAlign: 'center',
-          position: 'relative',
-          bgcolor: "#f0f2f5",
+          position: 'relative', // Ensure that this overlays the video
+          zIndex: 1, // Content should be above the video
+          bgcolor: "rgba(240, 242, 245, 0.9)", // Optional background color with transparency for contrast
         }}
       >
         <Container>
@@ -34,9 +60,9 @@ function Landing({ children }) {
             src={logo} 
             alt="Logo" 
             style={{
-              width: '40px', // Set the desired width for the image
-              height: 'auto', // Maintain aspect ratio
-              marginBottom: '10px' // Optional: Add some space below the image
+              width: '40px', 
+              height: 'auto', 
+              marginBottom: '10px'
             }} 
           />
           <Typography variant="caption" component="p">

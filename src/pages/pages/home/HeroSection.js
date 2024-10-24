@@ -7,7 +7,6 @@ import logo from '../../../images/Logo_blanco_simple.png';
 const useStyles = makeStyles((theme) => ({
   heroContainer: {
     height: '100vh',
-    backgroundImage: 'linear-gradient(to right, black, #f2fcfe)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icon: {
-    width: '90px',
+    width: '120px',
     margin: '10px 0',
   },
 }));
@@ -47,7 +46,7 @@ const HeroSection = () => {
   return (
     <Box className={classes.heroContainer}>
       <img src={logo} alt="Crypto" className={classes.icon} />
-      <Typography variant="h2">Welcome to CryptoVoice</Typography>
+      <Typography variant="h1">Welcome to CryptoVoice</Typography>
       <Typography variant="h6">Track your favorite cryptos in real-time</Typography>
       <Button variant="contained" className={classes.button} onClick={handleClick}>
         Explore Dashboard

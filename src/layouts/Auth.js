@@ -12,7 +12,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: linear-gradient(180deg, white, black); /* Gradient background */
+    /* Set gradient and background image */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.7)), 
+                url('https://framerusercontent.com/images/gDLZ3lXTL8phROUo0iUFtr1HEM.svg') no-repeat center center fixed;
+    background-size: cover; /* Cover the whole viewport */
+    color: #fff; /* Optional: Set text color for better contrast */
   }
 `;
 

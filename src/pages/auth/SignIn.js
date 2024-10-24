@@ -29,10 +29,27 @@ import { useHistory } from 'react-router-dom'; // For navigation in react-router
 const Button = styled(MuiButton)(spacing);
 
 const Wrapper = styled(Paper)`
+  position: relative;
   padding: ${props => props.theme.spacing(6)}px;
+  background: rgba(255, 255, 255, 0.2); /* semi-transparent background to apply the blur */
+  backdrop-filter: blur(20px); /* Apply blur effect */
+  border-radius: 15px;
 
   ${props => props.theme.breakpoints.up("md")} {
     padding: ${props => props.theme.spacing(10)}px;
+  }
+
+  /* Blurred background */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('your-background-image-url') no-repeat center center/cover;
+    filter: blur(20px); /* Adjust the blur intensity */
+    z-index: -1; /* Ensure the blur is behind the content */
   }
 `;
 
