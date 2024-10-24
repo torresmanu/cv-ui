@@ -8,8 +8,10 @@ import CurrentPricesCard from './CurrentPricesCard';
 import ChartsContainer from './ChartsContainer';
 import TokenToolbar from './TokenToolbar';
 import FearGreedIndicator from './FearGreedIndicator';
-import Carousel from './Carousel'; 
-import NewsSection from './NewsSection';
+
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 import Papa from 'papaparse'; 
 import { rgba } from 'polished'; 
 import CustomSlider from './CustomSlider';
@@ -127,6 +129,9 @@ const Dashboard = () => {
       - Upper Threshold: ${upperThreshold}`);
     handleCloseAlertModal();
   };
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md')); // Check if screen width is md or higher
+
 
   return (
     <Grid container spacing={3} className={classes.root}>
@@ -154,13 +159,59 @@ const Dashboard = () => {
           <Star style={{ color: '#ffffff', width: 26, height: 26 }} />
         </IconButton>
 
-        <Button variant="outlined" color="primary" onClick={handleOpenAlertModal} startIcon={<NotificationsIcon />}>
-          Create Alert
-        </Button>
+        {isMdUp ? (
+        // Full buttons with text on larger screens
+        <>
+          <Button 
+            variant="outlined" 
+            color="primary" 
+            onClick={handleOpenAlertModal} 
+            startIcon={<NotificationsIcon />}
+          >
+            Create Alert
+          </Button>
 
-        <Button variant="outlined" color="primary" onClick={downloadCSV} startIcon={<GetAppIcon />}>
-          Download CSV Data
-        </Button>
+          <Button 
+            variant="outlined" 
+            color="primary" 
+            onClick={downloadCSV} 
+            startIcon={<GetAppIcon />}
+          >
+            Download CSV Data
+          </Button>
+        </>
+      ) : (
+        // Icon-only buttons on mobile
+        <>
+          <IconButton 
+            color="primary" 
+            onClick={handleOpenAlertModal}
+            style={{
+              backgroundColor:  'rgba(255, 255, 255, 0.1)',
+              padding: 5,
+              borderRadius: 20,
+              opacity: 0.9,
+              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            <NotificationsIcon style={{ color: '#ffffff', width: 26, height: 26 }} />
+          </IconButton>
+
+          <IconButton 
+            color="primary" 
+            onClick={downloadCSV}
+            style={{
+              backgroundColor:  'rgba(255, 255, 255, 0.1)',
+              padding: 5,
+              borderRadius: 20,
+              opacity: 0.9,
+              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            <GetAppIcon style={{ color: '#ffffff', width: 26, height: 26 }} />
+          </IconButton>
+        </>
+      )}
       </Grid>
 
       <Grid item xs={12} md={8}>
