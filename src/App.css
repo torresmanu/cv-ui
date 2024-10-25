@@ -128,3 +128,19 @@ a {
 .plotly .modebar-btn:hover {
   background-color: rgba(255, 255, 255, 0) !important; /* Lighten the button background on hover */
 }
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
+  color: lime;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+pre {
+  font-size: 16px;
+  text-align: left;
+  white-space: pre;
+}

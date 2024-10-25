@@ -3,6 +3,7 @@ import { Box, Typography } from '@material-ui/core';
 import Plot from 'react-plotly.js';
 import Papa from 'papaparse';
 import CustomSwitch from '../../components/CustomSwitch';
+import GradientLineChart from './GradientLineChart';
 
 const tokenColors = {
   BTC: '#F7931A',
@@ -16,7 +17,7 @@ const tokenColors = {
 };
 
 const LinePlotChart = ({ selectedToken }) => {
-  const [dataByToken, setDataByToken] = useState({});
+ {/* const [dataByToken, setDataByToken] = useState({});
   const [groupByDay, setGroupByDay] = useState(true);
 
   const loadCSVData = () => {
@@ -65,11 +66,12 @@ const LinePlotChart = ({ selectedToken }) => {
 
   useEffect(() => {
     loadCSVData();
-  }, []);
+  }, []);*/}
 
   return (
     <Box sx={{ backgroundColor: 'transparent' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <GradientLineChart selectedToken={selectedToken}/>
+      {/*<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Typography variant="h6" gutterBottom>
           Real Price vs CryptoVoice Prediction (Token: {selectedToken})
         </Typography>
@@ -178,7 +180,7 @@ const LinePlotChart = ({ selectedToken }) => {
       />
       ) : (
         <Typography>No data available for the selected token.</Typography>
-      )}
+      )}*/}
     </Box>
   );
 };

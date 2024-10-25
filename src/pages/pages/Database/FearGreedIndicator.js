@@ -26,7 +26,7 @@ const FearGreedIndicator = ({ value }) => {
                     <Grid item>
                       <Icon
                         icon={isFear ? sadFaceIcon : emoticonHappyOutline}
-                        style={{ width: 58, height: 58, marginRight: 10, color: isFear ? '#FF3333' : '#4BFF33' }}
+                        style={{ width: 58, height: 58, marginRight: 10, color: isFear ? '#FF3333' : 'rgba(72, 177, 85, 1' }}
                       />
                     </Grid>
                     <Grid item>
@@ -34,7 +34,7 @@ const FearGreedIndicator = ({ value }) => {
                         <Typography
                           variant="body2"
                           style={{
-                            color: isFear ? '#FF3333' : '#4BFF33',
+                            color: isFear ? '#FF3333' : 'rgba(72, 177, 85, 1',
                             fontWeight: 500,
                             fontSize: '0.85rem', // Slightly smaller text size
                           }}

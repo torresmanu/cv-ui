@@ -50,7 +50,6 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
             {favoriteTokens.map((token) => {
               const { price, change } = tokenPrices[token];
               const isPositiveChange = change.startsWith('+');
-              const changeColor = isPositiveChange ? 'green' : 'red';
 
               return (
                 <Grid item key={token} xs={12} sm={6}>
@@ -68,7 +67,7 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
                         <Typography
                           variant="body2"
                           style={{
-                            color: isPositiveChange ? '#4BFF33' : '#FF3333',
+                            color: isPositiveChange ? 'rgba(72, 177, 85, 1)' : '#FF3333',
                             fontWeight: 500,
                             fontSize: '0.85rem', // Slightly smaller text size
                           }}
