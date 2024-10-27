@@ -16,6 +16,7 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 import Papa from 'papaparse';
 import CustomSwitch from '../../components/CustomSwitch';
 import { Box, Typography } from '@material-ui/core';
+import { AspectRatio } from '@material-ui/icons';
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Filler, Title, Tooltip, Legend, zoomPlugin);
@@ -119,14 +120,15 @@ const GradientLineChart = ({ selectedToken }) => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
+    AspectRatio: 3,
     scales: {
       y: {
         ticks: {
             color: 'white',
             callback: function(value) {
               if (value >= 1000) {
-                return (value / 1000).toFixed(2) + 'k';
+                return (value / 1000) + 'k';
               }
               else if (value <= 1){
                 return value.toFixed(2);
@@ -160,7 +162,7 @@ const GradientLineChart = ({ selectedToken }) => {
         },
         grid: { color: 'rgba(255, 255, 255, 0.1)' },
         title: {
-          display: true,
+          display: false,
           text: 'Date',
           font: { size: 16 },
           color: 'white',
@@ -169,15 +171,15 @@ const GradientLineChart = ({ selectedToken }) => {
     },
     plugins: {
       legend: {
-        display: true,
-        position: 'top',
-        align: 'start',
+        display: false,
+        position: 'bottom',
+        align: 'center',
         labels: {
           boxWidth: 20,
           padding: 10,
           color: 'white',
         },
-        margin: {
+        marginLeft: {
           left: 150
         },
       },
@@ -206,11 +208,39 @@ const GradientLineChart = ({ selectedToken }) => {
         <Typography variant="h6" gutterBottom>
           Real Price vs Prediction Price (Token: {selectedToken})
         </Typography>
-
         <CustomSwitch groupByDay={groupByDay} setGroupByDay={setGroupByDay} />
       </Box>
       {selectedToken && dataByToken[selectedToken] ? (
-        <Line data={chartData} options={options} />
+        <>
+          <Line data={chartData} options={options} />
+          <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 2 }}>
+              <Box
+                sx={{
+                  width: 16,
+                  height: 16,
+                  backgroundColor: 'rgba(72, 177, 85, 0.8)',
+                  borderRadius: '50%',
+                  marginRight: 5
+                }}
+              />
+              <Typography style={{ color: 'white', marginRight: 10 }}>Real Price</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  width: 16,
+                  height: 16,
+                  backgroundColor: tokenColors[selectedToken],
+                  borderRadius: '50%',
+                  marginRight: 1,
+                  marginRight: 10
+                }}
+              />
+              <Typography style={{ color: 'white' }}>Prediction Price</Typography>
+            </Box>
+          </Box>
+        </>
       ) : (
         <p>No data available</p>
       )}

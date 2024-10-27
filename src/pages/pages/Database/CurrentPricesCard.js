@@ -23,14 +23,14 @@ const tokenPrices = {
 
 // Sample token images
 const tokenImages = {
-  BTC: btcImage, 
+  BTC: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
   ETH: ethImage,
   ADA: adaImage,
   LINK: linkImage,
-  LTC: ltcImage,
-  BNB: bnbImage,
+  LTC: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png',
+  BNB: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
   MATIC: maticImage,
-  SOL: solImage,
+  SOL: 'https://cryptologos.cc/logos/solana-sol-logo.png',
 };
 
 const CurrentPricesCard = ({ favoriteTokens }) => {
@@ -67,7 +67,7 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
                         <Typography
                           variant="body2"
                           style={{
-                            color: isPositiveChange ? 'rgba(72, 177, 85, 1)' : '#FF3333',
+                            color: isPositiveChange ? '#2AAE6F' : '#FF3333',
                             fontWeight: 500,
                             fontSize: '0.85rem', // Slightly smaller text size
                           }}

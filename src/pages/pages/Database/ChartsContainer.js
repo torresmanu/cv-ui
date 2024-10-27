@@ -6,7 +6,7 @@ import CandlePlotChart from './CandlePlotChart';
 const ChartsContainer = ({ selectedToken }) => {
   return (
     <React.Fragment>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item xs={12}>
           <Card className="customCard">
             <CardContent>
@@ -15,7 +15,7 @@ const ChartsContainer = ({ selectedToken }) => {
           </Card>
         </Grid>
       </Grid>
-      <Grid container spacing={3} style={{marginTop: '10px'}}>
+      <Grid container spacing={4} style={{marginTop: '15px'}}>
         <Grid item xs={12}>
           <Card className="customCard">
             <CardContent>

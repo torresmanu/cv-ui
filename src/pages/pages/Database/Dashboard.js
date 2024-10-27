@@ -15,6 +15,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Papa from 'papaparse'; 
 import { rgba } from 'polished'; 
 import CustomSlider from './CustomSlider';
+import TopGainersCard from './TopGainers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,7 +135,7 @@ const Dashboard = () => {
 
 
   return (
-    <Grid container spacing={3} className={classes.root}>
+    <Grid container spacing={5} className={classes.root}>
       <Grid item xs={12} md={8}>
         <TokenToolbar
           selectedToken={selectedToken}
@@ -219,11 +220,14 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item xs={12} md={4}>
-        <Box mb={3}>
+        <Box mb={5}>
           <CurrentPricesCard favoriteTokens={favoriteTokens} />
         </Box>
-        <Box>
+        <Box mb={5}>
           <FearGreedIndicator value={65} />
+        </Box>
+        <Box>
+          <TopGainersCard/>
         </Box>
       </Grid>
 

@@ -83,7 +83,7 @@ const CandlePlotChart = ({ selectedToken }) => {
               close: dataByToken[selectedToken].map((point) => point.close),
               type: 'candlestick',
               name: selectedToken,
-              increasing: { line: { color: 'rgba(72, 177, 85, 1)'} },
+              increasing: { line: { color: '#2AAE6F'} },
               decreasing: { line: { color: '#FF3333' } },
             },
           ]}

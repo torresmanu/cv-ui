@@ -11,14 +11,14 @@ import solImage from '../../../images/sol.png';
 
 // Sample token images
 const tokenImages = {
-  BTC: btcImage,
+  BTC: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
   ETH: ethImage,
   ADA: adaImage,
   LINK: linkImage,
-  LTC: ltcImage,
-  BNB: bnbImage,
+  LTC: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png',
+  BNB: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
   MATIC: maticImage,
-  SOL: solImage,
+  SOL: 'https://cryptologos.cc/logos/solana-sol-logo.png',
 };
 
 const TokenToolbar = ({ selectedToken, onTokenChange }) => {
