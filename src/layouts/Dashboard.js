@@ -3,18 +3,13 @@ import styled, { createGlobalStyle } from "styled-components";
 
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-
 import { spacing } from "@material-ui/system";
-import {
-  Hidden,
-  CssBaseline,
-  Paper as MuiPaper,
-} from "@material-ui/core";
+import { CssBaseline, Paper as MuiPaper } from "@material-ui/core";
 
 import { connect } from "react-redux";
-
-import {closeSnackbar } from '../redux/actions/snackbarActions'
+import { closeSnackbar } from '../redux/actions/snackbarActions';
 import Notifier from "../components/Notifier";
+import backgroundSVG from '../images/M.svg';
 
 export const drawerWidth = '20vw';
 export const mobileDrawerWidth = '40vw';
@@ -56,27 +51,40 @@ const AppContent = styled.div`
 
 const Paper = styled(MuiPaper)(spacing);
 
+// Main content area with SVG overlay
 const MainContent = styled(Paper)`
   flex: 1;
   background: ${props => props.theme.body.background};
+  position: relative;
   
   ${props => props.theme.breakpoints.down("md")} {
     max-width: 100vw;
   }
-  
+
   ${props => props.theme.breakpoints.up("md")} {
     max-width: calc(100vw);
     padding-left: 8vw;
     padding-right: 8vw;
   }
- 
 
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    flex: none;
+  // SVG overlay
+  &::before {
+    content: "";
+    background: url(${backgroundSVG}) no-repeat center center;
+    background-size: cover;
+    opacity: 0.6; // Adjust for desired transparency
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
   }
 
-  .MuiPaper-root .MuiPaper-root {
-    box-shadow: none;
+  // Ensure content stays above the SVG background
+  > * {
+    position: relative;
+    z-index: 1;
   }
 `;
 
@@ -107,7 +115,7 @@ class Dashboard extends React.Component {
             />
         </Drawer>
         <AppContent>
-          <Header onDrawerToggle={this.handleDrawerToggle}/>
+          <Header onDrawerToggle={this.handleDrawerToggle} />
           <MainContent p={10}>
             {children}
           </MainContent>

@@ -41,7 +41,7 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
           Favorite Tokens
         </Typography>
         <Typography variant="body2" gutterBottom style={{marginBottom: 30}}>
-        Last 24hs.
+          Last 24hs.
         </Typography>
 
         {/* Loop through favorite tokens */}

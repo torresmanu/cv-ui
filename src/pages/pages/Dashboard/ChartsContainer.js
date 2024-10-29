@@ -15,15 +15,6 @@ const ChartsContainer = ({ selectedToken }) => {
           </Card>
         </Grid>
       </Grid>
-      <Grid container spacing={4} style={{marginTop: '15px'}}>
-        <Grid item xs={12}>
-          <Card className="customCard">
-            <CardContent>
-            <CandlePlotChart selectedToken={selectedToken} />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
     </React.Fragment>
   );
 };
