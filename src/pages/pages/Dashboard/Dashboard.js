@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(2),
-    marginTop: theme.spacing(2), 
+    marginTop: theme.spacing(6), 
   },
   sliderIcon: {
     color: theme.palette.primary.main,
@@ -126,14 +126,39 @@ const Dashboard = () => {
   };
 
   const handleCreateAlert = () => {
-    console.log(`Alert set for ${selectedToken}:
-      - Lower Threshold: ${lowerThreshold}
-      - Upper Threshold: ${upperThreshold}`);
     handleCloseAlertModal();
   };
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('md')); // Check if screen width is md or higher
 
+
+  const tokenPrices = {
+    BTC: 71067,
+    ETH: 2617,
+    ADA: 0.3469,
+    LINK: 11,
+    LTC: 72,
+    BNB: 605,
+    MATIC: 0.64,
+    SOL: 179
+  };
+
+  function trimToTwoDecimals(num) {
+    if (num > 10){
+      return Math.floor(num); // Removes decimals if num > 10
+    }
+    return Math.floor(num * 100) / 100;
+  }
+
+  useEffect(() => {
+    if (selectedToken && tokenPrices[selectedToken] !== undefined) {
+      const price = tokenPrices[selectedToken];
+      const lower = trimToTwoDecimals(price * 0.5)
+      const upper = trimToTwoDecimals(price * 1.5)
+      setLowerThreshold(lower); // 50% below the current price
+      setUpperThreshold(upper); // 50% above the current price
+    }
+  }, [selectedToken]);
 
   return (
     <Grid container spacing={5} className={classes.root}>
@@ -248,7 +273,8 @@ const Dashboard = () => {
         </Box>
       </Grid>
 
-      <Dialog open={openAlertModal} onClose={handleCloseAlertModal} fullWidth maxWidth="sm" PaperProps={{
+      <Dialog open={openAlertModal} onClose={handleCloseAlertModal} fullWidth maxWidth="sm" padding={10}
+      PaperProps={{
         style: {
           borderRadius: 20,
           border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -258,18 +284,16 @@ const Dashboard = () => {
         },
       }}>
         <DialogContent className={classes.dialogContent}>
-          <Typography variant="h5" gutterBottom>{selectedToken} Price Alert</Typography>
+          <Typography variant="h6" gutterBottom>{selectedToken} Price Alert</Typography>
           <Typography variant="body2" gutterBottom>Set your price thresholds</Typography>
 
           <Box className={classes.sliderBox}>
-            <TrendingDown className={classes.sliderIcon} />
-            <CustomSlider value={lowerThreshold} setValue={setLowerThreshold} />
-            <Typography variant="body2">{`$${lowerThreshold}`}</Typography>
+            <CustomSlider min={lowerThreshold} max={upperThreshold} />
           </Box>
 
-          <Box className={classes.dialogActionsBox}>
-            <Button onClick={handleCloseAlertModal} color="primary" variant="text">Cancel</Button>
-            <Button onClick={handleCreateAlert} color="primary" variant="contained">Create Alert</Button>
+          <Box className={classes.dialogActionsBox} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button onClick={handleCloseAlertModal} color="primary" variant="contained">Cancel</Button>
+            <Button onClick={handleCreateAlert} color="primary" variant="outlined">Create Alert</Button>
           </Box>
         </DialogContent>
       </Dialog>
