@@ -34,6 +34,7 @@ const HeaderContainer = styled.div`
 const Logo = styled.img`
   width: 130px;
   height: auto;
+  cursor: pointer;  // Changes cursor to pointer on hover
 `;
 
 const ProfileSection = styled.div`
@@ -69,7 +70,7 @@ const Header = ({ onDrawerToggle }) => {
           <Grid container alignItems="center" justifyContent="space-between">
             {/* Center - Logo */}
             <Grid item xs={4} container justifyContent="left">
-              <Logo src={logo} alt="App Logo" />
+              <Logo src={logo} alt="App Logo" onClick={handleLogout}/>
             </Grid>
 
             {/* Right side - Profile section */}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, Box, Avatar, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ethImage from '../../../images/eth.png';
+import { useHistory } from 'react-router-dom';
 
 const coins = [
   {
@@ -101,6 +102,11 @@ const useStyles = makeStyles((theme) => ({
 
 const TopGainersCard = () => {
   const classes = useStyles();
+  const history = useHistory();  // Initialize useHistory for navigation
+
+  const handleClick = () => {
+    history.push('/auth/sign-in');  // Redirect to dashboard
+  };
 
   return (
     <Card className={classes.card}>
@@ -126,7 +132,7 @@ const TopGainersCard = () => {
         ))}
       </CardContent>
       <Box className={classes.blurOverlay}>
-        <Button className="premiumButton" style={{ width: "50%" }}>Go Premium</Button>
+        <Button className="premiumButton" style={{ width: "50%" }} onClick={handleClick}>Go Premium</Button>
       </Box>
     </Card>
   );

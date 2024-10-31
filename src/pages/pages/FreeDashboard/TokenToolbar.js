@@ -8,6 +8,7 @@ import ltcImage from '../../../images/ltc.png';
 import bnbImage from '../../../images/bnb.png';
 import maticImage from '../../../images/matic.png';
 import solImage from '../../../images/sol.png';
+import { useHistory } from 'react-router-dom';  // Import useHistory  
 
 // Sample token images
 const tokenImages = {
@@ -18,9 +19,14 @@ const tokenImages = {
   LTC: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png',
   BNB: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
 };
-
 const TokenToolbar = ({ selectedToken, onTokenChange }) => {
+  const history = useHistory();  // Initialize useHistory for navigation
+
   const availableTokens = Object.keys(tokenImages);
+
+  const handleClick = () => {
+    history.push('/auth/sign-in');  // Redirect to dashboard
+  };
 
   return (
     <div>
@@ -53,7 +59,7 @@ const TokenToolbar = ({ selectedToken, onTokenChange }) => {
           </Grid>
         ))}
         <Grid item xs={12} md={3} style={{marginLeft: 'auto'}}>
-        <Button className="premiumButton" fullWidth >Go Premium</Button>
+        <Button className="premiumButton" fullWidth onClick={handleClick} >Go Premium</Button>
         </Grid>
       </Grid>
     </div>
