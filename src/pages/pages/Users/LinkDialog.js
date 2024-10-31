@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid/index";
 import Typography from "@material-ui/core/Typography/index";
 import DialogContent from "@material-ui/core/DialogContent/index";
 import Button from "@material-ui/core/Button/index";
-import {DataTable} from "../../../components/DataTable";
 import {DialogActions} from "@material-ui/core";
 import LinkActions from "./LinkActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -119,25 +118,6 @@ export default function LinkDialog({ open, handleClose, linked_institutions }){
         </Grid>
       </DialogTitle>
       <DialogContent>
-        { isLoading ?  
-          <Grid container justify="center">
-            <Grid item style={{paddingTop: '10%', paddingBottom: '5%'}}>
-              <CircularProgress alt={'loading..'}/>
-            </Grid>
-          </Grid> 
-            :
-          <DataTable
-            model={'LinkInstitutions'}
-            displayColumns={displayColumns()}
-            tableColumns={columns}
-            title={'Institutions'}
-            labelButton='Institutions'
-            showModalTitle={false}
-            overrideOption={options}
-            backButton={false}
-            tableData={formattedData}
-          />
-        }
       </DialogContent>
       <DialogActions>
         <Button

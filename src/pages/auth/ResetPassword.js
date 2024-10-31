@@ -18,7 +18,6 @@ import { spacing } from "@material-ui/system";
 import {Logo} from "../components/Logo";
 import logo from "../../images/Logo4.png";
 import confirmation from "../../images/check2.png";
-import WarningDialog from "../../components/DataTable/warningDialog";
 import {validatePassword} from "./authHelper";
 import { AuthService } from "../../services/AuthService";
 import { red } from "@material-ui/core/colors";
@@ -201,16 +200,6 @@ function ForgotPassword() {
         >
           SAVE
         </Button>
-        <WarningDialog
-          open={warningDialog}
-          onClose={handleWarningClose}
-          cancelButton={true}
-          title={'The password must meet the following requirements'}
-          contentText={['Between 8 and 64 characters',
-            'Must contains at least 1 uppercase, 1 lowercase, 1 number and 1 special character',
-            'Must not contain the User Email, dots or commas'
-          ]}
-        />
         </Wrapper>
       </>
       : 
