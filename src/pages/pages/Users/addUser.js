@@ -18,6 +18,7 @@ import {useHistory, useLocation} from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {PortalUsersService} from "../../../services/PortalUsersService";
 import {validatePassword} from "../../auth/authHelper";
+import WarningDialog from "../../../components/DataTable/warningDialog";
 import LinkDialog from "./LinkDialog";
 import GLOBALS from "../../../services/GLOBALS.json";
 import { red, green } from '@material-ui/core/colors';
@@ -325,6 +326,23 @@ function AddUser() {
               institution_name={props?.institution_name || ''}
             />
           } 
+          <WarningDialog
+            open={warningDialog}
+            onClose={handleWarningClose}
+            cancelButton={true}
+            title={'The password must meet the following requirements'}
+            contentText={['Between 8 and 64 characters',
+              'Must contains at least 1 uppercase, 1 lowercase, 1 number and 1 special character',
+              'Must not contain the User Email'
+            ]}
+          />
+          <WarningDialog
+            open={mismatchWarningDialog}
+            onClose={handleWarningClose}
+            cancelButton={true}
+            title={'Password Mismatch'}
+            contentText={['The new password and password confirmation do not match.']}
+          />
         </>
       </RegisterForm>
     :

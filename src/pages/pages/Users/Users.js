@@ -1,6 +1,8 @@
 import React from 'react';
+import {DataTable} from "../../../components/DataTable";
 
 import {MuiThemeProvider, Typography} from "@material-ui/core";
+import {getStyles} from "../../../components/DataTable/CustomStyles";
 import { useLocation} from "react-router-dom";
 
 import UserActions from "./UserActions";
@@ -121,7 +123,22 @@ const options = {
   },
 };
   return(
-    <MuiThemeProvider >
+    <MuiThemeProvider
+      theme={(theme) => {
+        return getStyles(theme);
+      }}
+    >
+      <DataTable
+        model={'Users'}
+        displayColumns={displayColumns()}
+        tableColumns={columns}
+        title={props.title}
+        labelButton='Users'
+        showModalTitle={false}
+        overrideOption={options}
+        id={props.institution_id}
+        addButton={canEdit}
+      />
     </MuiThemeProvider>
   )
 }

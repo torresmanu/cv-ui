@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormFields } from "../../../utils/hooksLib";
 import { Button, Grid, Typography, Divider } from "@material-ui/core";
+import WarningDialog from "../../../components/DataTable/warningDialog";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import { withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
@@ -174,6 +175,24 @@ function MyAccount() {
               </Grid>
             </Grid>
           </form>
+          <WarningDialog
+            open={warningDialog}
+            onClose={handleClose}
+            cancelButton={true}
+            title={'The password must meet the following requirements'}
+            contentText={[
+              'Between 8 and 64 characters',
+              'Must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character',
+              'Must not contain the username, dots o commas'
+            ]}
+          />
+          <WarningDialog
+            open={passwordMismatchDialog}
+            onClose={handleClose}
+            cancelButton={true}
+            title={'Password Mismatch'}
+            contentText={['The new password and password confirmation do not match.']}
+          />
         </>
       </RegisterForm>
     </>
