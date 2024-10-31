@@ -168,8 +168,7 @@ const Dashboard = () => {
         // Full buttons with text on larger screens
         <>
           <Button 
-                    className='buttonDisabled'
-
+            className='buttonDisabled'
             variant="outlined" 
             color="primary" 
             onClick={handleOpenAlertModal} 
@@ -205,7 +204,7 @@ const Dashboard = () => {
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <NotificationsIcon style={{ color: '#ffffff', width: 26, height: 26 }} />
+            <NotificationsIcon style={{ color: 'rgba(255, 255, 255, 0.5)', width: 26, height: 26 }} />
           </IconButton>
 
           <IconButton 
@@ -219,7 +218,7 @@ const Dashboard = () => {
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
             }}
           >
-            <GetAppIcon style={{ color: '#ffffff', width: 26, height: 26 }} />
+            <GetAppIcon style={{ color: 'rgba(255, 255, 255, 0.5)', width: 26, height: 26 }} />
           </IconButton>
         </>
       )}
@@ -234,8 +233,13 @@ const Dashboard = () => {
         </Grid>
 
         {/* Right Side - Info Cards */}
-        <Grid item xs={12} md={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-          <Box style={{ flexGrow: 1 }}>
+        <Grid 
+          item 
+          xs={12} 
+          md={4} 
+          style={isMdUp ? { display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' } : {}}
+        > 
+          <Box style={isMdUp ? {flexGrow: 1 } : {marginBottom: 20}}>
             <TopGainersCard/>
           </Box>
           <Box>

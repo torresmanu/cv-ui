@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   leftColumn: {
     flex: 1,
     padding: theme.spacing(30),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+    },
   },
   header: {
     marginBottom: theme.spacing(1),

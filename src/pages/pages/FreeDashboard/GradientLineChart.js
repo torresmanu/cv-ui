@@ -16,7 +16,9 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 import Papa from 'papaparse';
 import CustomSwitch from '../../components/CustomSwitch';
 import { Box, Typography } from '@material-ui/core';
-import { AspectRatio } from '@material-ui/icons';
+import useMediaQuery  from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import { display } from '@material-ui/system';
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Filler, Title, Tooltip, Legend, zoomPlugin);
@@ -35,6 +37,8 @@ const tokenColors = {
 const GradientLineChart = ({ selectedToken }) => {
   const [dataByToken, setDataByToken] = useState({});
   const [groupByDay, setGroupByDay] = useState(true);
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md')); // Check if screen width is md or higher
 
   const loadCSVData = () => {
     fetch(`${process.env.PUBLIC_URL}/data.csv`)
@@ -202,17 +206,86 @@ const GradientLineChart = ({ selectedToken }) => {
     }
   };
 
+  const optionsMobile = {
+    responsive: true,
+    maintainAspectRatio: true, // Dynamically adjust aspect ratio
+    aspectRatio: 2, // Wider for desktop, taller for mobile
+    scales: {
+      y: {
+        ticks: {
+          display: false
+        },
+        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        title: {
+          display: false,
+          text: 'Price (USD)',
+          font: { size: window.innerWidth > 600 ? 16 : 12 },
+          color: 'white',
+        },
+      },
+      x: {
+        ticks: {
+          display: false
+        },
+        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        title: {
+          display: false,
+          text: 'Date',
+          font: { size: window.innerWidth > 600 ? 16 : 12 },
+          color: 'white',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: window.innerWidth > 600, // Hide legend on mobile
+        position: 'bottom',
+        labels: {
+          boxWidth: 20,
+          padding: 10,
+          color: 'white',
+        },
+      },
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'x',
+        },
+        zoom: {
+          enabled: true,
+          mode: 'x',
+          drag: true,
+        },
+      },
+    },
+    interaction: {
+      mode: 'nearest',
+      axis: 'x',
+      intersect: false,
+    },
+  };
+
   return (
-    <div style={{ height: '400px', width: '100%' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+    <div style={{ height: isMdUp ? '400px': '200px', width: '100%' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: isMdUp ? 'row' : 'column',
+          alignItems: isMdUp ? 'center' : 'flex-start',
+          justifyContent: 'space-between',
+          marginBottom: '10px',
+        }}
+      >
         <Typography variant="h6" gutterBottom>
-          Real Price vs Prediction Price (Token: {selectedToken})
+          Real Price vs Prediction {isMdUp ? `Price (Token: ${selectedToken})` : `Price`}
         </Typography>
-        <CustomSwitch groupByDay={groupByDay} setGroupByDay={setGroupByDay} />
+        <Box sx={{ marginTop: isMdUp ? 0 : '10px' }}> {/* Adds spacing when stacked */}
+          <CustomSwitch groupByDay={groupByDay} setGroupByDay={setGroupByDay} />
+        </Box>
       </Box>
       {selectedToken && dataByToken[selectedToken] ? (
         <>
-          <Line data={chartData} options={options} />
+          <Line data={chartData} options={isMdUp ? options : optionsMobile} />
           <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 2 }}>
               <Box
