@@ -41,6 +41,7 @@
     "clsx": "^2.1.0",
     "date-fns": "2.8.1",
     "env-cmd": "^10.1.0",
+    "framer-motion": "^4.1.17",
     "i18n-iso-countries": "^7.10.0",
     "immer": "^10.0.3",
     "material-ui-confirm": "^2.1.3",
