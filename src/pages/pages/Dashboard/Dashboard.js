@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button, Dialog, DialogContent, IconButton, Box, Typography, Card, CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Star, TrendingUp, TrendingDown } from '@material-ui/icons'; 
+import { Star } from '@material-ui/icons'; 
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import CurrentPricesCard from './CurrentPricesCard';
@@ -17,6 +17,7 @@ import { rgba } from 'polished';
 import CustomSlider from './CustomSlider';
 import TopGainersCard from './TopGainers';
 import CandlePlotChart from './CandlePlotChart';
+import FramerCard from '../FreeDashboard/FrameCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -280,6 +281,7 @@ const Dashboard = () => {
           <TopGainersCard/>
         </Box>
       </Grid>
+      <FramerCard/>
 
       <Dialog open={openAlertModal} onClose={handleCloseAlertModal} fullWidth maxWidth="sm" padding={10}
       PaperProps={{

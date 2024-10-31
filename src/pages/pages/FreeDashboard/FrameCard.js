@@ -81,6 +81,10 @@ const useStyles = makeStyles((theme) => ({
 const FramerCard = () => {
   const classes = useStyles();
 
+  const handleTrading = () => {
+    window.location.href = 'https://accounts.binance.com/register?ref=254061274&utm_medium=web_share_link_whatsapp';
+  }
+
   return (
     <Box className={classes.root}>
       {/* Left Column with Text and Button */}
@@ -95,7 +99,7 @@ const FramerCard = () => {
           Experience the <span style={{ fontWeight: 'bold' }}> most trusted exchange</span> to buy and sell $BTC, $ETH, stablecoins, and more.
           Access 30+ tokens and 16+ deposit networks.
         </Typography>
-        <Button variant="contained" className={`${classes.button} ${classes.buttonHover}`}>
+        <Button variant="contained" className={`${classes.button} ${classes.buttonHover}`} onClick={handleTrading}>
         <motion.div
           className={classes.arrowIcon}
           initial={{ x: 0, y: 4 }}
