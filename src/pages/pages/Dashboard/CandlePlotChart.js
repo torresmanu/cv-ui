@@ -83,8 +83,8 @@ const CandlePlotChart = ({ selectedToken }) => {
               close: dataByToken[selectedToken].map((point) => point.close),
               type: 'candlestick',
               name: selectedToken,
-              increasing: { line: { color: '#2AAE6F'} },
-              decreasing: { line: { color: '#FF3333' } },
+              increasing: { line: { color: '#2AAE6F', width: 0.7 } },  // Set width for thinner candles
+              decreasing: { line: { color: '#FF3333', width: 0.7 } },  // Set width for thinner candles
             },
           ]}
           layout={{
@@ -114,7 +114,7 @@ const CandlePlotChart = ({ selectedToken }) => {
               },
               tickcolor: 'rgba(255, 255, 255, 0)',
               ticklen: 10,
-              tickwidth: 0.1,
+              tickwidth: 0.5,
             },
             margin: { t: 30, r: 20, l: 60, b: 70 },
             autosize: true,
