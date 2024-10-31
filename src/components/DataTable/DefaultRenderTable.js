@@ -16,7 +16,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import AddUserDialog from "../../pages/pages/Users/AddUserDialog";
 import AccessDenied from "../AccessDenied";
 import { de, fi } from "date-fns/locale";
-import CreateInstanceDialog from "../../pages/pages/Institutions/CreateInstanceDialog";
 import { set } from "date-fns";
 
 const useStyles = makeStyles({
@@ -216,14 +215,7 @@ const DefaultRenderDataTable = (getListModel, fields, options, key, setKey) => {
                     </Button>
                   </Grid>
                 </Grid>
-                <CreateInstanceDialog
-                  open={openInstanceDialog}
-                  handleClose={(e)=>{
-                    setOpenInstanceDialog(false)
-                  }}                  
-                  institution_id={fields.id}
-                  responseData={instanceData}
-                />
+
                 </>
                 :
                 fields.model === "KPI" || fields.model === "Failures" ?
