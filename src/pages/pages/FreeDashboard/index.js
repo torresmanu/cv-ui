@@ -31,7 +31,6 @@ function Database() {
   } = useSelector((state) => state.filters);
 
   // Local state variables
-  const [resultCount, setResultCount] = useState('');
   const [evaluationsData, setEvaluationsData] = useState({});
   const [subjectsData, setSubjectsData] = useState({});
   const [resultsLoading, setResultsLoading] = useState(false);

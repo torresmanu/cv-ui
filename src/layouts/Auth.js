@@ -12,11 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    /* Set gradient and background image */
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.7)), 
-                url('https://framerusercontent.com/images/gDLZ3lXTL8phROUo0iUFtr1HEM.svg') no-repeat center center fixed;
-    background-size: cover; /* Cover the whole viewport */
-    color: #fff; /* Optional: Set text color for better contrast */
+    background: ${props => props.theme.body.background};
   }
 `;
 
@@ -41,6 +37,7 @@ function Auth({ children }) {
         alignItems="flex-start" /* Updated to use Material UI v5 syntax */
       >
         <Grid item xs={12}>
+          
           {children}
         </Grid>
       </Grid>

@@ -20,7 +20,7 @@ import Divider from "@material-ui/core/Divider";
 import AuthErrors from "./AuthErrors";
 import Grid from "@material-ui/core/Grid";
 import {Logo} from "../components/Logo";
-import logo from "../../images/Logo4.png";
+import logo from "../../images/Logo.png";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { useHistory } from 'react-router-dom'; // For navigation in react-router-dom v5
@@ -80,11 +80,11 @@ function SignIn({error}) {
         alignItems="center"
       >
         <Grid item>
-          <Logo logo={logo} padding={'10px'} width={'200px'} />
+          <Logo logo={logo} padding={'10px'} width={'300px'} />
         </Grid>
       </Grid>
       <form onSubmit={handleSubmit}>
-        <FormControl margin="normal" required fullWidth>
+        <FormControl margin="normal" fullWidth>
           <TextField
             id="username"
             name="username"
@@ -93,7 +93,7 @@ function SignIn({error}) {
             autoFocus
             onChange={handleFieldChange}/>
         </FormControl>
-        <FormControl margin="normal" required fullWidth>
+        <FormControl margin="normal" fullWidth>
         <InputLabel htmlFor="password">Password</InputLabel>
           <Input
             name="password"
@@ -120,7 +120,6 @@ function SignIn({error}) {
         >
           LOGIN
         </Button>
-        <AuthErrors error={error}/>
       </form>
       <Divider/>
       <div align="center" style={{ marginTop: 20 }}>

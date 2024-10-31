@@ -1,8 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Grid, Typography, Box, LinearProgress, Tooltip } from '@material-ui/core';
 import { Icon } from '@iconify/react';
-import CountUp from 'react-countup'; // Import CountUp for animation
 import emoticonHappyOutline from '@iconify/icons-mdi/emoticon-happy-outline';
 import sadFaceIcon from '@iconify-icons/mdi/emoticon-sad-outline';
 import { Card, CardContent } from '@material-ui/core';

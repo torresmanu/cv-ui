@@ -17,6 +17,7 @@ import { rgba } from 'polished';
 import CustomSlider from './CustomSlider';
 import TopGainersCard from './TopGainers';
 import CandlePlotChart from './CandlePlotChart';
+import FramerCard from './FrameCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -235,26 +236,14 @@ const Dashboard = () => {
         {/* Right Side - Info Cards */}
         <Grid item xs={12} md={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
           <Box style={{ flexGrow: 1 }}>
-            <CurrentPricesCard favoriteTokens={favoriteTokens} />
+            <TopGainersCard/>
           </Box>
           <Box>
             <FearGreedIndicator value={65} />
           </Box>
         </Grid>
       </Grid>
-      
-      <Grid item xs={12} md={8} style={{marginTop: 20}}>
-        <Card className="customCard">
-          <CardContent>
-          <CandlePlotChart selectedToken={selectedToken} />
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12} md={4} style={{marginTop: 20}}>
-        <Box>
-          <TopGainersCard/>
-        </Box>
-      </Grid>
+      <FramerCard/>
 
       <Dialog open={openAlertModal} onClose={handleCloseAlertModal} fullWidth maxWidth="sm" PaperProps={{
         style: {

@@ -91,16 +91,12 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     width: '100%',
     height: '60%',
-    backdropFilter: 'blur(15px)',
-    backgroundColor: 'rgba(30, 35, 41, 0.1)', // Additional opacity to darken
+    background: 'linear-gradient(to bottom, rgba(30, 35, 41, 0) 0%, rgba(30, 35, 41, 0.1) 30%, rgba(30, 35, 41, 0.8) 100%)',
+    backdropFilter: 'blur(9px)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  premiumButton: {
-    color: '#FFD700', // Gold color
-    fontWeight: 600,
-  },
+    }
 }));
 
 const TopGainersCard = () => {
@@ -130,7 +126,7 @@ const TopGainersCard = () => {
         ))}
       </CardContent>
       <Box className={classes.blurOverlay}>
-        <Button className="premiumButton">Go Premium</Button>
+        <Button className="premiumButton" style={{ width: "50%" }}>Go Premium</Button>
       </Box>
     </Card>
   );
