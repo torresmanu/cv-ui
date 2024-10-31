@@ -52,7 +52,7 @@ const CurrentPricesCard = ({ favoriteTokens }) => {
               const isPositiveChange = change.startsWith('+');
 
               return (
-                <Grid item key={token} xs={12} sm={6}>
+                <Grid item key={token} xs={6} sm={6}>
                   <Grid container alignItems="center" spacing={2}>
                     <Grid item>
                       <img

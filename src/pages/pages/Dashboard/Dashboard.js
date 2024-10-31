@@ -219,6 +219,8 @@ const Dashboard = () => {
               borderRadius: 20,
               opacity: 0.9,
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+              marginRight: 20,
+              marginLeft: 20,
             }}
           >
             <NotificationsIcon style={{ color: '#ffffff', width: 26, height: 26 }} />
@@ -233,6 +235,7 @@ const Dashboard = () => {
               borderRadius: 20,
               opacity: 0.9,
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+              
             }}
           >
             <GetAppIcon style={{ color: '#ffffff', width: 26, height: 26 }} />
@@ -250,9 +253,14 @@ const Dashboard = () => {
         </Grid>
 
         {/* Right Side - Info Cards */}
-        <Grid item xs={12} md={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-          <Box style={{ flexGrow: 1 }}>
-            <CurrentPricesCard favoriteTokens={favoriteTokens} />
+        <Grid 
+          item 
+          xs={12} 
+          md={4} 
+          style={isMdUp ? { display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' } : {}}
+        > 
+          <Box style={isMdUp ? {flexGrow: 1 } : {marginBottom: 20}}>
+            <CurrentPricesCard favoriteTokens={favoriteTokens}/>
           </Box>
           <Box>
             <FearGreedIndicator value={65} />
