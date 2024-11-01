@@ -59,7 +59,7 @@ const Header = ({ onDrawerToggle }) => {
   };
 
   const handleLogout = () => {
-    history.push('/');  // Redirect to dashboard
+    window.location.href = 'https://torresmanu.github.io/cv-ui/';
   }
 
   return (
