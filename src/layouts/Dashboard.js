@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 import { spacing } from "@material-ui/system";
 import {
@@ -111,6 +112,7 @@ class Dashboard extends React.Component {
           <MainContent p={10}>
             {children}
           </MainContent>
+          <Footer/>
         </AppContent>
       </Root>
     );

@@ -1,65 +1,37 @@
 import React from "react";
-import styled from "styled-components";
+import logo from "../images/Logo.png";
+import { Box, Container, Typography, Link } from "@material-ui/core";
 
-import {
-  Grid,
-  Hidden,
-  List,
-  ListItemText,
-  ListItem as MuiListItem
-} from "@material-ui/core";
 
-const Wrapper = styled.div`
-  padding: ${props => props.theme.spacing(1) / 4}px
-    ${props => props.theme.spacing(4)}px;
-  background: ${props => props.theme.palette.common.white};
-  position: relative;
-`;
-
-const ListItem = styled(MuiListItem)`
-  display: inline-block;
-  width: auto;
-  padding-left: ${props => props.theme.spacing(2)}px;
-  padding-right: ${props => props.theme.spacing(2)}px;
-
-  &,
-  &:hover,
-  &:active {
-    color: #000;
-  }
-`;
 
 function Footer() {
   return (
-    <Wrapper>
-      <Grid container spacing={0}>
-        <Hidden smDown>
-          <Grid container item xs={12} md={6}>
-            <List>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Support" />
-              </ListItem>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Help Center" />
-              </ListItem>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Privacy" />
-              </ListItem>
-              <ListItem component="a" href="#">
-                <ListItemText primary="Terms of Service" />
-              </ListItem>
-            </List>
-          </Grid>
-        </Hidden>
-        <Grid container item xs={12} md={6} justify="flex-end">
-          <List>
-            <ListItem>
-              <ListItemText primary="© 2021 Bbot Solutions" />
-            </ListItem>
-          </List>
-        </Grid>
-      </Grid>
-    </Wrapper>
+    <Box
+    sx={{
+      py: 5,
+      textAlign: 'center',
+      position: 'relative', // Ensure that this overlays the video
+      zIndex: 1, // Content should be above the video
+      bgcolor: "#1E2023", // Optional background color with transparency for contrast
+    }}
+  >
+    <Container>
+    <Typography variant="paragraph" component="p"style={{ fontStyle: 'italic' }}>
+    The information provided on this platform is for informational purposes only and should not be considered financial advice. We are not licensed financial advisors. Users should conduct their own research and consult with a licensed financial advisor before making any investment decisions. The platform is not responsible for any financial decisions made based on the information provided.
+    </Typography>
+      <img 
+        src={logo} 
+        alt="Logo" 
+        style={{
+          width: '100px', 
+          height: 'auto', 
+          marginTop: '5px'}} 
+      />
+      <Typography variant="caption" component="p">
+        © All rights reserved
+      </Typography>
+    </Container>
+  </Box>
   );
 }
 
