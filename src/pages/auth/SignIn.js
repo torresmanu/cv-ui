@@ -9,7 +9,8 @@ import {
   InputAdornment,
   IconButton,
   InputLabel,
-  Input
+  Input,
+  Typography
 } from "@material-ui/core";
 import { spacing } from "@material-ui/system";
 import {useFormFields} from "../../utils/hooksLib";
@@ -126,7 +127,10 @@ function SignIn({error}) {
         <Link href="/auth/forgot-password" variant="body2">
           Forgot your password?
         </Link>
-      </div>
+        <Typography variant="body1" style={{ marginTop: 20 }}>
+        This is a demo. No account is needed—just click ‘Login’ to proceed.
+        </Typography>
+              </div>
     </Wrapper>
           :
           <div/>
