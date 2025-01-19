@@ -8,12 +8,14 @@ import dateFilterReducer from './dateFilterReducer';
 import kpiDataReducer from './kpiDataReducer';
 
 import dbFilterReducer from '../store/dbFilterSlice';
+import tokenReducer from '../store/tokenSlice';
 
 
 export default combineReducers({
 	dateFilter: dateFilterReducer,
 	kpiData: kpiDataReducer,
 	filters: dbFilterReducer,
+	tokens: tokenReducer,
 	alertMessages,
 	themeReducer,
 	auth
