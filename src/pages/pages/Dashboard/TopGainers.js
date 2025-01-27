@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopGainersCard = () => {debugger
+const TopGainersCard = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 

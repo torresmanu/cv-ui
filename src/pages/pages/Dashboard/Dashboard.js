@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid, Button, Dialog, DialogContent, IconButton, Box, Typography } from '@material-ui/core';
+import { Grid, Button, Dialog, DialogContent, IconButton, Box, Typography, Card, CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Star } from '@material-ui/icons';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -13,6 +13,8 @@ import TopGainersCard from './TopGainers';
 
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { hi } from 'date-fns/locale';
+import CandlePlotChart from './CandlePlotChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +55,16 @@ const Dashboard = () => {
     { id: 'solana', symbol: 'SOL' },
   ]);
 
+  const tokenDictioanry = {
+    'bitcoin': 'BTC',
+    'ethereum': 'ETH',
+    'cardano': 'ADA',
+    'litecoin': 'LTC',
+    'binancecoin': 'BNB',
+    'polygon': 'MATIC',
+    'solana': 'SOL',
+  };
+
   // Dispatch the action to fetch all historical data
   useEffect(() => {
     if (status === 'idle') {
@@ -72,8 +84,10 @@ const Dashboard = () => {
   const handleCloseAlertModal = () => setOpenAlertModal(false);
 
   const downloadCSV = () => {
-    if (selectedToken && historicalData[selectedToken]) {
-      const csvData = historicalData[selectedToken]
+    const token = selectedToken ? tokenDictioanry[selectedToken] : undefined;
+    console.log(historicalData[token])
+    if (selectedToken && historicalData[token]) {
+      const csvData = historicalData[token]
         .map((item) => `${item.date.toISOString()},${item.realPrice}`)
         .join('\n');
       const blob = new Blob([`Date,Price\n${csvData}`], { type: 'text/csv;charset=utf-8;' });
@@ -100,7 +114,7 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item xs={12} md={4} className={classes.buttonContainer}>
-        <IconButton
+{/*         <IconButton
           onClick={handleFavoriteToggle}
           aria-label="favorite"
           style={{
@@ -109,14 +123,31 @@ const Dashboard = () => {
             borderRadius: 20,
             opacity: 0.9,
           }}
+          disabled={true}
         >
           <Star style={{ color: '#ffffff', width: 26, height: 26 }} />
+        </IconButton> */}
+        <IconButton
+          className='buttonDisabled'
+          onClick={handleFavoriteToggle}
+          aria-label="favorite"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            padding: 5,
+            borderRadius: 20,
+            opacity: 0.9,
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+          }}
+          disabled
+        >
+          <Star style={{ color: 'rgba(255, 255, 255, 0.5)', width: 26, height: 26 }} />
         </IconButton>
-        <Button
+{/*         <Button
           variant="outlined"
           color="primary"
           onClick={handleOpenAlertModal}
           startIcon={<NotificationsIcon />}
+          disabled={true}
         >
           Create Alert
         </Button>
@@ -127,12 +158,69 @@ const Dashboard = () => {
           startIcon={<GetAppIcon />}
         >
           Download CSV Data
-        </Button>
+        </Button> */}
+
+        {isMdUp ? (
+        // Full buttons with text on larger screens
+        <>
+          <Button 
+            className='buttonDisabled'
+            variant="outlined" 
+            color="primary" 
+            onClick={handleOpenAlertModal} 
+            startIcon={<NotificationsIcon />}
+            disabled
+          >
+            Create Alert
+          </Button>
+
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={downloadCSV}
+            startIcon={<GetAppIcon />}
+          >
+            Download CSV Data
+          </Button>
+        </>
+      ) : (
+        // Icon-only buttons on mobile
+        <>
+          <IconButton 
+            color="primary" 
+            onClick={handleOpenAlertModal}
+            style={{
+              backgroundColor:  'rgba(255, 255, 255, 0.1)',
+              padding: 5,
+              borderRadius: 20,
+              opacity: 0.9,
+              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            <NotificationsIcon style={{ color: 'rgba(255, 255, 255, 0.5)', width: 26, height: 26 }} />
+          </IconButton>
+
+          <IconButton 
+            color="primary" 
+            onClick={downloadCSV}
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)', // Bright blue background for enabled state
+              padding: 5,
+              borderRadius: 20,
+              border: '1px solid #FFFFFF', // White border
+              opacity: 1, // Full opacity
+              boxShadow: 'none', // Remove shadow
+            }}
+          >
+            <GetAppIcon style={{ color: '#FFFFFF', width: 26, height: 26 }} />
+          </IconButton>
+        </>
+      )}
       </Grid>
 
       <Grid container spacing={5}>
         <Grid item xs={12} md={8}>
-          <ChartsContainer selectedToken={selectedToken} historicalData={historicalData[selectedToken] || []} />
+          <ChartsContainer selectedToken={selectedToken} />
         </Grid>
         {/* Right Side - Info Cards */}
         <Grid 
@@ -148,6 +236,13 @@ const Dashboard = () => {
             <FearGreedIndicator />
           </Box>
         </Grid>
+      </Grid>
+      <Grid item xs={12} md={8} style={{marginTop: 20}}>
+        <Card className="customCard">
+          <CardContent>
+          <CandlePlotChart selectedToken={selectedToken} />
+          </CardContent>
+        </Card>
       </Grid>
 
       <Dialog

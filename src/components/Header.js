@@ -73,7 +73,7 @@ const Header = ({ onDrawerToggle }) => {
               <Logo src={logo} alt="App Logo" onClick={handleLogout}/>
             </Grid>
 
-            {/* Right side - Profile section */}
+            {/* Right side - Profile section 
             <Grid item xs={4} container justifyContent="flex-end">
               <ProfileSection>
                 <Typography variant="body1">Hello, User</Typography>
@@ -85,7 +85,7 @@ const Header = ({ onDrawerToggle }) => {
                 />
               </ProfileSection>
 
-              {/* Popover component */}
+              {/* Popover component 
               <Popover
                 open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
@@ -107,9 +107,10 @@ const Header = ({ onDrawerToggle }) => {
               >
                 <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Princing</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem> {/* Logout option */}
+                <MenuItem onClick={handleLogout}>Logout</MenuItem> {/* Logout option 
               </Popover>
             </Grid>
+            */}
           </Grid>
         </Toolbar>
         </HeaderContainer>
