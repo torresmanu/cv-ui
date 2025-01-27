@@ -9,6 +9,8 @@ import kpiDataReducer from './kpiDataReducer';
 
 import dbFilterReducer from '../store/dbFilterSlice';
 import tokenReducer from '../store/tokenSlice';
+import sentimentReducer from '../store/sentimentSlice';
+import topGainersReducer from '../store/topGainersSlice';
 
 
 export default combineReducers({
@@ -16,6 +18,8 @@ export default combineReducers({
 	kpiData: kpiDataReducer,
 	filters: dbFilterReducer,
 	tokens: tokenReducer,
+	sentiment: sentimentReducer,
+	topGainers: topGainersReducer,
 	alertMessages,
 	themeReducer,
 	auth

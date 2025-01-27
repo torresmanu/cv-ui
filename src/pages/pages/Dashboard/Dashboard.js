@@ -8,6 +8,11 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import ChartsContainer from './ChartsContainer';
 import TokenToolbar from './TokenToolbar';
 import { fetchAllHistoricalData } from '../../../redux/store/tokenSlice';
+import FearGreedIndicator from './FearGreedIndicator';
+import TopGainersCard from './TopGainers';
+
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md')); // Check if screen width is md or higher
 
   // Access token data and status from Redux
   const historicalData = useSelector((state) => state.tokens.data);
@@ -125,6 +133,20 @@ const Dashboard = () => {
       <Grid container spacing={5}>
         <Grid item xs={12} md={8}>
           <ChartsContainer selectedToken={selectedToken} historicalData={historicalData[selectedToken] || []} />
+        </Grid>
+        {/* Right Side - Info Cards */}
+        <Grid 
+          item 
+          xs={12} 
+          md={4} 
+          style={isMdUp ? { display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' } : {}}
+        > 
+          <Box style={isMdUp ? {flexGrow: 1 } : {marginBottom: 20}}>
+            <TopGainersCard/>
+          </Box>
+          <Box>
+            <FearGreedIndicator />
+          </Box>
         </Grid>
       </Grid>
 
