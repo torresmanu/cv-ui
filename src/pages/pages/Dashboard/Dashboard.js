@@ -15,6 +15,7 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { hi } from 'date-fns/locale';
 import CandlePlotChart from './CandlePlotChart';
+import FramerCard from '../FreeDashboard/FrameCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -221,30 +222,29 @@ const Dashboard = () => {
       <Grid container spacing={5}>
         <Grid item xs={12} md={8}>
           <ChartsContainer selectedToken={selectedToken} />
+          <Card className="customCard" style={{marginTop: 20}}>
+            <CardContent>
+              <CandlePlotChart selectedToken={selectedToken} />
+            </CardContent>
+        </Card>
         </Grid>
         {/* Right Side - Info Cards */}
         <Grid 
           item 
           xs={12} 
           md={4} 
-          style={isMdUp ? { display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' } : {}}
+          spacing={15}
+          style={isMdUp ? { } : {}}
         > 
-          <Box style={isMdUp ? {flexGrow: 1 } : {marginBottom: 20}}>
-            <TopGainersCard/>
+          <Box style={ {marginBottom: 20}}>
+            <FearGreedIndicator />
           </Box>
           <Box>
-            <FearGreedIndicator />
+            <TopGainersCard/>
           </Box>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={8} style={{marginTop: 20}}>
-        <Card className="customCard">
-          <CardContent>
-          <CandlePlotChart selectedToken={selectedToken} />
-          </CardContent>
-        </Card>
-      </Grid>
-
+      <FramerCard/>
       <Dialog
         open={openAlertModal}
         onClose={handleCloseAlertModal}

@@ -21,7 +21,7 @@ export const fetchTopGainers = createAsyncThunk(
       const topGainers = data
         .filter((coin) => coin.price_change_percentage_24h > 0) // Only positive gainers
         .sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h)
-        .slice(0, 3) // Take top 3 gainers
+        .slice(0, 10) // Take top 3 gainers
         .map((coin) => ({
           id: coin.id,
           name: coin.name,
