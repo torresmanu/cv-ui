@@ -178,3 +178,72 @@ pre {
   opacity: 0.5;
   box-shadow: none;
 }
+
+/* NewsSection.css */
+.news-card {
+  position: relative;
+  background-color: #1E2329; /* Dark background */
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.news-card:hover .news-arrows {
+  opacity: 1;
+}
+
+.news-card-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 40px; /* Add padding inside the card */
+}
+
+.news-image {
+  width: 100%;
+  border-radius: 12px;
+  padding-right: 15px;
+}
+
+.news-description {
+  font-size: 14px;
+  color: #dcdcdc; /* Light gray text */
+}
+
+.news-button {
+  padding: 0px 50px;
+  height: 31px;
+  margin-top: 30px;
+  border: 1px solid white;
+  color: white;
+}
+
+.news-arrows {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  padding: 10px; /* Add space around the arrow */
+}
+
+.news-arrow-left {
+  left: 10px; /* Move arrow further left for spacing */
+}
+
+.news-arrow-right {
+  right: 10px; /* Move arrow further right for spacing */
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}

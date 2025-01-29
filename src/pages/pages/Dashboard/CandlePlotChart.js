@@ -19,7 +19,7 @@ const CandlePlotChart = ({ selectedToken }) => {
   const status = useSelector((state) => state.tokens.status);
 
   // Prepare candlestick chart data
-  const prepareChartData = (data) => { debugger
+  const prepareChartData = (data) => {
     const groupedData = data.reduce((acc, point) => {
       const dayKey = new Date(point.date).toISOString().split('T')[0];
       if (!acc[dayKey]) {
