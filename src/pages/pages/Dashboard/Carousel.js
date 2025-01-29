@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCryptoNews } from '../../../redux/store/binanceNewsSlice';
 import styled, { keyframes } from 'styled-components';
-import { Tooltip } from '@material-ui/core';
+import { Tooltip, CircularProgress, Typography, useMediaQuery } from '@material-ui/core';
 
 const scrollAnimation = keyframes`
   0% {
@@ -26,17 +28,17 @@ const CarouselContainer = styled.div`
 const CarouselContent = styled.div`
   display: inline-block;
   padding: 10px 0;
-  animation: ${scrollAnimation} ${({ duration }) => duration * 100}s linear infinite;
+  animation: ${scrollAnimation} ${({ duration }) => duration}s linear infinite;
   display: flex;
   align-items: center;
   width: 100%;
 `;
 
-const TweetContainer = styled.div`
+const NewsItem = styled.div`
   display: flex;
   align-items: center;
   margin-right: 50px;
-  color: white; /* Set text to white */
+  color: white;
 `;
 
 const Avatar = styled.img`
@@ -46,54 +48,56 @@ const Avatar = styled.img`
   margin-right: 10px;
 `;
 
-// Tweets data (hardcoded)
-const tweets = [
-    { username: 'ElonMusk', text: 'This is a sample tweet about crypto markets.', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
-    { username: 'CryptoUser', text: 'Breaking news! Crypto is going up fast! Stay tuned.', avatar: 'https://randomuser.me/api/portraits/men/3.jpg' },
-    { username: 'finance', text: 'CryptoVoice predicts that BTC will rise by 5%.', avatar: 'https://randomuser.me/api/portraits/women/3.jpg' },
-    { username: 'Binance', text: 'Here’s my analysis on ETH. Let’s see what happens next.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' },
-    { username: 'iLoveUPC', text: 'CryptoVoice TFM is awesome! Take a look at', avatar: 'https://randomuser.me/api/portraits/men/5.jpg' },
-    { username: 'CryptoUser', text: 'Breaking news! Crypto is going up fast! Stay tuned.', avatar: 'https://randomuser.me/api/portraits/men/2.jpg' },
-    { username: 'finance', text: 'CryptoVoice predicts that BTC will rise by 5%.', avatar: 'https://randomuser.me/api/portraits/women/1.jpg' },
-    { username: 'Binance', text: 'Here’s my analysis on ETH. Let’s see what happens next.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' }
-  ];
-
 const Carousel = () => {
+  const dispatch = useDispatch();
+  const { data: newsArticles, status, error } = useSelector((state) => state.cryptoNews);
   const carouselContentRef = useRef(null);
-  const [animationDuration, setAnimationDuration] = useState(45); // Initial duration
+  const isMobile = useMediaQuery('(max-width: 600px)');
+  const [animationDuration, setAnimationDuration] = useState(30); // Default duration
 
   useEffect(() => {
-    if (carouselContentRef.current) {
+    if (status === 'idle') {
+      dispatch(fetchCryptoNews());
+    }
+  }, [dispatch, status]);
+
+  useEffect(() => {
+    if (carouselContentRef.current && newsArticles.length > 0) {
       const contentWidth = carouselContentRef.current.scrollWidth;
       const viewportWidth = carouselContentRef.current.parentElement.offsetWidth;
-      const speedPerPixel = 0.05;
-      const calculatedDuration = (contentWidth / viewportWidth) * speedPerPixel;
+      const speedPerPixel = isMobile ? 0.02 : 0.05; // Increase speed on mobile
+      let calculatedDuration = (contentWidth / viewportWidth) * speedPerPixel;
+
+      if (isMobile) {
+        calculatedDuration = Math.max(15, calculatedDuration); // Ensure it's fast enough on mobile
+      } else {
+        calculatedDuration = Math.max(30, calculatedDuration); // Ensure minimum duration on desktop
+      }
+
       setAnimationDuration(calculatedDuration);
     }
-  }, [carouselContentRef]);
+  }, [newsArticles, isMobile]);
+
+  if (status === 'loading') return <CircularProgress />;
+  if (status === 'failed') return <Typography color="error">Error loading news: {error}</Typography>;
+  if (!newsArticles.length) return <Typography>No news available.</Typography>;
 
   return (
     <CarouselContainer>
       <CarouselContent ref={carouselContentRef} duration={animationDuration}>
-        {[...tweets, ...tweets].map((tweet, index) => (
-          <Tooltip 
-            key={index} 
-            title={`Go to @${tweet.username} account on X (Twitter)`} 
-            arrow
-            placement="top"
-          >
+        {[...newsArticles, ...newsArticles].map((article, index) => (
+          <Tooltip key={index} title={`Read on ${article.username}`} arrow placement="top">
             <a 
-              href={`https://twitter.com/${tweet.username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none', color: 'inherit' }} // Inherit white text color
+              href={article.newsLink} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <TweetContainer>
-                <Avatar src={tweet.avatar} alt={`${tweet.username} avatar`} />
+              <NewsItem>
                 <span>
-                  <strong>@{tweet.username}</strong>: {tweet.text.slice(0, 100)}...
+                  <strong>{article.username}</strong>: {article.text.slice(0, 100)}...
                 </span>
-              </TweetContainer>
+              </NewsItem>
             </a>
           </Tooltip>
         ))}

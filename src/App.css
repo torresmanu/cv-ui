@@ -178,3 +178,85 @@ pre {
   opacity: 0.5;
   box-shadow: none;
 }
+
+/* NewsSection.css */
+.news-card {
+  position: relative;
+  background-color: #1E2329; /* Dark background */
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.news-card:hover .news-arrows {
+  opacity: 1;
+}
+
+.news-card-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 40px; /* Add padding inside the card */
+}
+
+.news-image {
+  width: 100%;
+  border-radius: 12px;
+  padding-right: 15px;
+}
+
+.news-description {
+  font-size: 14px;
+  color: #dcdcdc; /* Light gray text */
+}
+.news-button {
+  padding: 5px 30px; /* Adjust padding */
+  height: 35px; /* Slightly increase height */
+  margin-top: 20px;
+  border: 1px solid white;
+  color: white;
+  white-space: nowrap; /* Prevent text wrapping */
+  max-width: fit-content; /* Prevent button from taking full width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive: Adjust for mobile screens */
+@media (max-width: 600px) {
+  .news-button {
+    padding: 5px 20px; /* Reduce padding */
+    font-size: 14px; /* Decrease font size slightly */
+    height: 32px;
+  }
+}
+
+.news-arrows {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  padding: 10px; /* Add space around the arrow */
+}
+
+.news-arrow-left {
+  left: 10px; /* Move arrow further left for spacing */
+}
+
+.news-arrow-right {
+  right: 10px; /* Move arrow further right for spacing */
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}

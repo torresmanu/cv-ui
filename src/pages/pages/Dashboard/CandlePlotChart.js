@@ -1,90 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
 import Plot from 'react-plotly.js';
-import Papa from 'papaparse';
 
 const CandlePlotChart = ({ selectedToken }) => {
-  const [dataByToken, setDataByToken] = useState({});
-
-  const loadCSVData = () => {
-    fetch(`${process.env.PUBLIC_URL}/data.csv`)
-      .then((response) => response.text())
-      .then((csvText) => {
-        Papa.parse(csvText, {
-          header: true,
-          dynamicTyping: true,
-          complete: (results) => {
-            const tokenMap = {};
-            const cutoffDate = new Date('2024-08-15T23:59:59'); // Set the cutoff date to August 15, 2024
-  
-            // Iterate over rows and group them by token and day
-            results.data.forEach((row) => {
-              if (row.Token && row.Real_price && row.Fecha) {
-                const date = new Date(row.Fecha);
-  
-                // Only process data up to August 15
-                if (date <= cutoffDate) {
-                  const dayKey = date.toISOString().split('T')[0]; // Extract only the date part (YYYY-MM-DD)
-  
-                  // Initialize the map for the token if not done already
-                  if (!tokenMap[row.Token]) tokenMap[row.Token] = {};
-                  if (!tokenMap[row.Token][dayKey]) {
-                    tokenMap[row.Token][dayKey] = {
-                      open: row.Real_price,
-                      high: row.Real_price,
-                      low: row.Real_price,
-                      close: row.Real_price,
-                    };
-                  } else {
-                    // Update the high, low, and close prices for the day
-                    tokenMap[row.Token][dayKey].high = Math.max(tokenMap[row.Token][dayKey].high, row.Real_price);
-                    tokenMap[row.Token][dayKey].low = Math.min(tokenMap[row.Token][dayKey].low, row.Real_price);
-                    tokenMap[row.Token][dayKey].close = row.Real_price;  // Last price will be the close price
-                  }
-                }
-              }
-            });
-  
-            // Now flatten the grouped data into an array
-            const flattenedTokenMap = {};
-            Object.keys(tokenMap).forEach((token) => {
-              flattenedTokenMap[token] = Object.keys(tokenMap[token]).map((dayKey) => ({
-                date: new Date(dayKey),
-                open: tokenMap[token][dayKey].open,
-                high: tokenMap[token][dayKey].high,
-                low: tokenMap[token][dayKey].low,
-                close: tokenMap[token][dayKey].close,
-              }));
-            });
-  
-            setDataByToken(flattenedTokenMap);
-          },
-        });
-      });
+  const tokenDictionary = {
+    bitcoin: 'BTC',
+    ethereum: 'ETH',
+    cardano: 'ADA',
+    litecoin: 'LTC',
+    binancecoin: 'BNB',
+    polygon: 'MATIC',
+    solana: 'SOL',
   };
 
-  useEffect(() => {
-    loadCSVData();
-  }, []);
+  // Access token data and status from Redux
+  const tokenData = useSelector((state) => state.tokens.data[tokenDictionary[selectedToken]]);
+  const status = useSelector((state) => state.tokens.status);
+
+  // Prepare candlestick chart data
+  const prepareChartData = (data) => {
+    const groupedData = data.reduce((acc, point) => {
+      const dayKey = new Date(point.date).toISOString().split('T')[0];
+      if (!acc[dayKey]) {
+        acc[dayKey] = {
+          open: point.realPrice,
+          high: point.realPrice,
+          low: point.realPrice,
+          close: point.realPrice,
+        };
+      } else {
+        acc[dayKey].high = Math.max(acc[dayKey].high, point.realPrice);
+        acc[dayKey].low = Math.min(acc[dayKey].low, point.realPrice);
+        acc[dayKey].close = point.realPrice;
+      }
+      return acc;
+    }, {});
+
+    return Object.entries(groupedData).map(([date, { open, high, low, close }]) => ({
+      date: new Date(date),
+      open,
+      high,
+      low,
+      close,
+    }));
+  };
+
+  const processedData = tokenData ? prepareChartData(tokenData) : [];
 
   return (
     <Box sx={{ backgroundColor: 'transparent' }}>
       <Typography variant="h6" gutterBottom>
-        Candlestick Chart (Token: {selectedToken})
+        Candlestick Chart (Token: {selectedToken.charAt(0).toUpperCase() + selectedToken.slice(1)})
       </Typography>
-      {selectedToken && dataByToken[selectedToken] && dataByToken[selectedToken].length > 0 ? (
+      {status === 'loading' ? (
+        <Typography>Loading data...</Typography>
+      ) : status === 'failed' ? (
+        <Typography variant="body2" style={{ color: 'red' }}>
+          Error loading data for {selectedToken}.
+        </Typography>
+      ) : processedData.length > 0 ? (
         <Plot
           data={[
             {
-              x: dataByToken[selectedToken].map((point) => point.date),
-              open: dataByToken[selectedToken].map((point) => point.open),
-              high: dataByToken[selectedToken].map((point) => point.high),
-              low: dataByToken[selectedToken].map((point) => point.low),
-              close: dataByToken[selectedToken].map((point) => point.close),
+              x: processedData.map((point) => point.date),
+              open: processedData.map((point) => point.open),
+              high: processedData.map((point) => point.high),
+              low: processedData.map((point) => point.low),
+              close: processedData.map((point) => point.close),
               type: 'candlestick',
-              name: selectedToken,
-              increasing: { line: { color: '#2AAE6F', width: 0.7 } },  // Set width for thinner candles
-              decreasing: { line: { color: '#FF3333', width: 0.7 } },  // Set width for thinner candles
+              name: tokenDictionary[selectedToken],
+              increasing: { line: { color: '#2AAE6F', width: 0.7 } },
+              decreasing: { line: { color: '#FF3333', width: 0.7 } },
             },
           ]}
           layout={{
@@ -130,7 +117,7 @@ const CandlePlotChart = ({ selectedToken }) => {
           }}
         />
       ) : (
-        <Typography>No data available for the selected token.</Typography>
+        <Typography>No data available for {selectedToken}.</Typography>
       )}
     </Box>
   );

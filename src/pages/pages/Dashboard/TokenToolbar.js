@@ -14,13 +14,26 @@ const tokenImages = {
   BTC: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
   ETH: ethImage,
   ADA: adaImage,
-  LINK: linkImage,
+ // LINK: linkImage,
   LTC: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png',
   BNB: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
-  MATIC: maticImage,
-  SOL: 'https://cryptologos.cc/logos/solana-sol-logo.png',
+ // MATIC: maticImage,
+ //SOL: 'https://cryptologos.cc/logos/solana-sol-logo.png',
 };
 
+// token map
+const tokenMap = {
+  bitcoin: 'BTC',
+  ethereum: 'ETH',
+  cardano: 'ADA',
+  litecoin: 'LTC',
+  binancecoin: 'BNB',
+
+};
+// Function to get the key by value
+const getKeyByValue = (map, value) => {
+  return Object.keys(map).find((key) => map[key] === value);
+};
 const TokenToolbar = ({ selectedToken, onTokenChange }) => {
   const availableTokens = Object.keys(tokenImages);
 
@@ -30,8 +43,8 @@ const TokenToolbar = ({ selectedToken, onTokenChange }) => {
         {availableTokens.map((token) => (
           <Grid item key={token}>
             <Button
-              onClick={() => onTokenChange(token)}
-              className={selectedToken === token ? 'selectedToken' : ''}
+              onClick={() => onTokenChange(getKeyByValue(tokenMap, token))}
+              className={tokenMap[selectedToken] === token ? 'selectedToken' : ''}
             >
               <img
                 src={tokenImages[token]} // Use the token image for each button
