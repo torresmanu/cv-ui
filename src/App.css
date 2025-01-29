@@ -210,13 +210,26 @@ pre {
   font-size: 14px;
   color: #dcdcdc; /* Light gray text */
 }
-
 .news-button {
-  padding: 0px 50px;
-  height: 31px;
-  margin-top: 30px;
+  padding: 5px 30px; /* Adjust padding */
+  height: 35px; /* Slightly increase height */
+  margin-top: 20px;
   border: 1px solid white;
   color: white;
+  white-space: nowrap; /* Prevent text wrapping */
+  max-width: fit-content; /* Prevent button from taking full width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive: Adjust for mobile screens */
+@media (max-width: 600px) {
+  .news-button {
+    padding: 5px 20px; /* Reduce padding */
+    font-size: 14px; /* Decrease font size slightly */
+    height: 32px;
+  }
 }
 
 .news-arrows {

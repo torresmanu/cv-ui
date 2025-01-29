@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCryptoNews } from '../../../redux/store/binanceNewsSlice';
 import styled, { keyframes } from 'styled-components';
-import { Tooltip, CircularProgress, Typography } from '@material-ui/core';
+import { Tooltip, CircularProgress, Typography, useMediaQuery } from '@material-ui/core';
 
 const scrollAnimation = keyframes`
   0% {
@@ -28,7 +28,7 @@ const CarouselContainer = styled.div`
 const CarouselContent = styled.div`
   display: inline-block;
   padding: 10px 0;
-  animation: ${scrollAnimation} ${({ duration }) => duration * 100}s linear infinite;
+  animation: ${scrollAnimation} ${({ duration }) => duration}s linear infinite;
   display: flex;
   align-items: center;
   width: 100%;
@@ -52,7 +52,8 @@ const Carousel = () => {
   const dispatch = useDispatch();
   const { data: newsArticles, status, error } = useSelector((state) => state.cryptoNews);
   const carouselContentRef = useRef(null);
-  const [animationDuration, setAnimationDuration] = useState(45);
+  const isMobile = useMediaQuery('(max-width: 600px)');
+  const [animationDuration, setAnimationDuration] = useState(30); // Default duration
 
   useEffect(() => {
     if (status === 'idle') {
@@ -64,11 +65,18 @@ const Carousel = () => {
     if (carouselContentRef.current && newsArticles.length > 0) {
       const contentWidth = carouselContentRef.current.scrollWidth;
       const viewportWidth = carouselContentRef.current.parentElement.offsetWidth;
-      const speedPerPixel = 0.05;
-      const calculatedDuration = (contentWidth / viewportWidth) * speedPerPixel;
+      const speedPerPixel = isMobile ? 0.02 : 0.05; // Increase speed on mobile
+      let calculatedDuration = (contentWidth / viewportWidth) * speedPerPixel;
+
+      if (isMobile) {
+        calculatedDuration = Math.max(15, calculatedDuration); // Ensure it's fast enough on mobile
+      } else {
+        calculatedDuration = Math.max(30, calculatedDuration); // Ensure minimum duration on desktop
+      }
+
       setAnimationDuration(calculatedDuration);
     }
-  }, [newsArticles]);
+  }, [newsArticles, isMobile]);
 
   if (status === 'loading') return <CircularProgress />;
   if (status === 'failed') return <Typography color="error">Error loading news: {error}</Typography>;
@@ -85,8 +93,7 @@ const Carousel = () => {
               rel="noopener noreferrer" 
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <NewsItem>  
-      {       /*<Avatar src={article.avatar} alt={`${article.username} Logo`} />*/ }
+              <NewsItem>
                 <span>
                   <strong>{article.username}</strong>: {article.text.slice(0, 100)}...
                 </span>
