@@ -8,25 +8,48 @@ const tokens = [
   { id: 'litecoin', symbol: 'LTC' },
   {id: 'binancecoin', symbol: 'BNB' },                      
 ];
+const API_KEY = 'CG-Pd9barSNAVtBvNPYm8xkzJXp';
 
-// Fetch historical data for all tokens
+// ✅ Fetch historical data for all tokens
 export const fetchAllHistoricalData = createAsyncThunk(
   'tokens/fetchAllHistoricalData',
-  async () => {
-    const data = {};
-    await Promise.all(
-      tokens.map(async (token) => {
-        const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${token.id}/market_chart?vs_currency=usd&days=30`
-        );
-        const result = await response.json();
-        data[token.symbol] = result.prices.map(([timestamp, price]) => ({
-          date: new Date(timestamp),
-          realPrice: price,
-        }));
-      })
-    );
-    return data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = {};
+
+      const responses = await Promise.allSettled(
+        tokens.map(async (token) => {
+          try {
+            const response = await fetch(
+              `https://api.coingecko.com/api/v3/coins/${token.id}/market_chart?vs_currency=usd&days=30`,
+              {
+                headers: {
+                  'x-cg-demo-api-key': API_KEY, // ✅ Corrected header
+                },
+              }
+            );
+
+            if (!response.ok) throw new Error(`Failed ${token.id}: ${response.statusText}`);
+
+            const result = await response.json();
+            if (!result.prices) throw new Error(`No data for ${token.id}`);
+
+            data[token.symbol] = result.prices.map(([timestamp, price]) => ({
+              date: new Date(timestamp),
+              realPrice: price,
+            }));
+          } catch (error) {
+            console.error(`Error fetching ${token.id}:`, error.message);
+          }
+        })
+      );
+
+      if (Object.keys(data).length === 0) throw new Error('No token data retrieved');
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
