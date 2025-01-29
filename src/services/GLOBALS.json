@@ -1,5 +1,5 @@
 {
-  "VERSION": "1.17.0.dev.00",
+  "VERSION": "1.0.0",
   "SESSION_KEYS":{
     "EXPIRATION_TIME": "expiration_time",
     "EXPIRATION_DATE": "expiration_date",
