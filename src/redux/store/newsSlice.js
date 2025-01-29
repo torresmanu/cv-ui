@@ -1,7 +1,7 @@
 // ✅ Use CoinGecko API (No API Key Needed)
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_KEY = 'YOUR_API_KEY'; // Replace with your actual CoinGecko API key
+const API_KEY = 'CG-Pd9barSNAVtBvNPYm8xkzJXp';
 const API_URL = 'https://api.coingecko.com/api/v3/news';
 
 export const fetchCryptoNews = createAsyncThunk(
