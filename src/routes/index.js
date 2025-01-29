@@ -36,7 +36,7 @@ const Home = async(() => import("../pages/pages/home/Homepage"));
 
 const homeRoutes = {
   id: "Home",
-  path: "/",
+  path: "/home",
   component: Home,
   children: null,
   hidden: true
@@ -93,7 +93,7 @@ const authRoutes = {
 
 const DashboardRoutes = {
   id: "Dashboard",
-  path: "/dashboard",
+  path: "/",
   component: Dashboard,
   icon: <BarChart />,
 };
