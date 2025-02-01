@@ -22,7 +22,7 @@ const NewsCard = ({ imageUrl, title, description, newsLink, handleNext, handlePr
               {title}
             </Typography>
             <Typography variant="body2" className="news-description">
-              {description}
+              {description.length > 350 ? `${description.slice(0, 350)}...` : description}
             </Typography>
             <Button
               variant="outlined"

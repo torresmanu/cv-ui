@@ -11,7 +11,7 @@ export const fetchCryptoNews = createAsyncThunk(
 
       const response = await fetch(`${API_URL}?page=1`, {
         headers: {
-          'x-cg-api-key': API_KEY,
+          'x-cg-demo-api-key': API_KEY,
         },
       });
 

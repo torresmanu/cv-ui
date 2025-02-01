@@ -24,7 +24,7 @@ export const fetchAllHistoricalData = createAsyncThunk(
               `https://api.coingecko.com/api/v3/coins/${token.id}/market_chart?vs_currency=usd&days=30`,
               {
                 headers: {
-                  'x-cg-demo-api-key': API_KEY, // ✅ Corrected header
+                  'x-cg-demo-api-key': API_KEY,
                 },
               }
             );
