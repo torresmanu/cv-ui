@@ -92,7 +92,7 @@ const tokenDictioanry = {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: { top: 5, bottom: 15 }, // ✅ Prevents unnecessary spacing
+      padding: window.innerWidth < 600 ? { top: 5, bottom: 15 } : { top: 25, bottom: 40 }, // ✅ Prevents unnecessary spacing
     },
     scales: {
       y: {

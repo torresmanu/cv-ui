@@ -46,12 +46,13 @@ const CandlePlotChart = ({ selectedToken }) => {
     }));
   };
 
+  const isMobile = window.innerWidth < 600; // ✅ Detect mobile view
   const processedData = tokenData ? prepareChartData(tokenData) : [];
-
+  
   return (
     <Box sx={{ backgroundColor: 'transparent' }}>
       <Typography variant="h6" gutterBottom>
-        Candlestick Chart (Token: {selectedToken.charAt(0).toUpperCase() + selectedToken.slice(1)})
+        Candlestick Chart ({selectedToken.charAt(0).toUpperCase() + selectedToken.slice(1)})
       </Typography>
       {status === 'loading' ? (
         <Typography>Loading data...</Typography>
@@ -76,36 +77,24 @@ const CandlePlotChart = ({ selectedToken }) => {
           ]}
           layout={{
             xaxis: {
-              title: 'Date',
+              title: isMobile ? '' : 'Date', // ✅ Hide title on mobile
               type: 'date',
               gridcolor: 'rgba(255, 255, 255, 0.1)',
-              titlefont: {
-                color: 'white',
-              },
-              tickfont: {
-                color: 'white',
-              },
+              titlefont: { color: 'white' },
+              tickfont: { color: 'white', size: isMobile ? 10 : 14 }, // ✅ Smaller font on mobile
               showgrid: false,
+              tickangle: isMobile ? -45 : 0, // ✅ Avoid overlap on mobile
+              rangeslider: { visible: false },
             },
             yaxis: {
-              title: {
-                text: 'Price (USD)',
-                font: {
-                  color: 'white',
-                },
-                standoff: 20,
-              },
               gridcolor: 'rgba(255, 255, 255, 0.1)',
-              tickfont: {
-                color: 'white',
-              },
-              tickcolor: 'rgba(255, 255, 255, 0)',
-              ticklen: 10,
-              tickwidth: 0.5,
+              tickfont: { color: 'white', size: isMobile ? 10 : 14 }, // ✅ Smaller font on mobile
+              tickvals: isMobile ? undefined : undefined, // ✅ Fewer ticks on mobile
+              showgrid: false, // ✅ Removes grid for cleaner look
             },
-            margin: { t: 30, r: 20, l: 60, b: 70 },
+            margin: { t: 20, r: 10, l: isMobile ? 40 : 60, b: isMobile ? 50 : 70 }, // ✅ Adjust margins
             autosize: true,
-            height: 500,
+            height: isMobile ? 200 : 500, // ✅ Smaller height on mobile
             paper_bgcolor: 'rgba(255, 255, 255, 0)',
             plot_bgcolor: 'rgba(255, 255, 255, 0)',
           }}
