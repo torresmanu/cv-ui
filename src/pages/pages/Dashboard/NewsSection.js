@@ -17,7 +17,7 @@ const NewsCard = ({ imageUrl, title, description, newsLink, handleNext, handlePr
           <Grid item md={4} xs={12}>
             <img src={imageUrl} alt={title} className="news-image" />
           </Grid>
-          <Grid item md={6} xs={12}>
+          <Grid item md={7} xs={12}>
             <Typography variant="h6" gutterBottom>
               {title}
             </Typography>

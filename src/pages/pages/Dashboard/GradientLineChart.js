@@ -82,8 +82,10 @@ const tokenDictioanry = {
           fill: true,
           backgroundColor: gradient,
           borderColor: 'rgba(72, 177, 85, 0.8)',
-          pointRadius: 0,
-          tension: 0.3,
+          pointRadius: 0, // ✅ Small visible points
+          pointHoverRadius: 6, // ✅ Larger points on hover
+          pointHitRadius: 10, // ✅ Easier to hover over points
+          tension: 0.3, // ✅ Less smoothing, more accurate hover
         },
       ],
     };
@@ -93,7 +95,12 @@ const tokenDictioanry = {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: window.innerWidth < 600 ? { top: 5, bottom: 15 } : { top: 25, bottom: 40 }, // ✅ Prevents unnecessary spacing
+      padding: window.innerWidth < 600 ? { top: 5, bottom: 15 } : { top: 25, bottom: 40 },
+    },
+    interaction: {
+      mode: 'nearest', // ✅ Snaps to nearest data point
+      axis: 'x', // ✅ Ensures smooth tracking along x-axis
+      intersect: false, // ✅ Ensures hover works even when not directly on the point
     },
     scales: {
       y: {
@@ -106,11 +113,7 @@ const tokenDictioanry = {
             return value >= 1000 ? `${value / 1000}k` : value.toFixed(2);
           },
         },
-        grid: {
-          display: window.innerWidth < 600 ? false : true, // ✅ Hides grid lines
-          drawBorder: false, // ✅ Removes axis border line
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
+        grid: { display: window.innerWidth < 600 ? false : true, drawBorder: false, color: 'rgba(255, 255, 255, 0.1)' },
       },
       x: {
         ticks: {
@@ -121,17 +124,11 @@ const tokenDictioanry = {
           maxRotation: 0,
           minRotation: 0,
         },
-        grid: {
-          display: window.innerWidth < 600 ? false : true, // ✅ Hides grid lines
-          drawBorder: false, // ✅ Removes axis border line
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
+        grid: { display: window.innerWidth < 600 ? false : true, drawBorder: false, color: 'rgba(255, 255, 255, 0.1)' },
       },
     },
     plugins: {
-      legend: {
-        display: false, // ✅ Hide dataset labels in legend
-      },
+      legend: { display: false },
       zoom: {
         pan: { enabled: true, mode: 'x' },
         zoom: { enabled: true, mode: 'x', drag: true },
