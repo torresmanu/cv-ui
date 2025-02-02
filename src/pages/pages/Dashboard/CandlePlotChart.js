@@ -77,7 +77,6 @@ const CandlePlotChart = ({ selectedToken }) => {
           ]}
           layout={{
             xaxis: {
-              title: isMobile ? '' : 'Date', // ✅ Hide title on mobile
               type: 'date',
               gridcolor: 'rgba(255, 255, 255, 0.1)',
               titlefont: { color: 'white' },
@@ -94,7 +93,7 @@ const CandlePlotChart = ({ selectedToken }) => {
             },
             margin: { t: 20, r: 10, l: isMobile ? 40 : 60, b: isMobile ? 50 : 70 }, // ✅ Adjust margins
             autosize: true,
-            height: isMobile ? 200 : 500, // ✅ Smaller height on mobile
+            height: isMobile ? 200 : 400, // ✅ Smaller height on mobile
             paper_bgcolor: 'rgba(255, 255, 255, 0)',
             plot_bgcolor: 'rgba(255, 255, 255, 0)',
           }}
