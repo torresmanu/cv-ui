@@ -58,7 +58,14 @@ a {
   background: rgba(30, 35, 41, 0.6);  /* Darker background with some transparency */
   color: white; /* Adapt to theme color */
   backdrop-filter: blur(10px); /* Apply the blur effect */
-  padding: 20px;
+  padding: 20px; /* Default padding */
+}
+
+/* 🔹 Reduce padding on mobile screens */
+@media (max-width: 600px) {
+  .customCard {
+    padding: 10px; /* Smaller padding for mobile */
+  }
 }
 
 /* Button styles for all buttons */

@@ -56,7 +56,8 @@ const tokenDictioanry = {
 
   const chartData = (canvas) => {
     const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    const height = window.innerWidth < 600 ? 150 : 300; // ✅ Adaptive height based on screen size
+    const gradient = ctx.createLinearGradient(0, 0, 0, height); 
     gradient.addColorStop(0, 'rgba(72, 177, 85, 0.3)');
     gradient.addColorStop(1, 'rgba(72, 177, 85, 0)');
 
@@ -76,7 +77,6 @@ const tokenDictioanry = {
       labels: formattedDates,
       datasets: [
         {
-          label: 'Real Price',
           data: dataToPlot.map((item) => item.avgRealPrice || item.realPrice),
           fill: true,
           backgroundColor: gradient,
@@ -90,41 +90,61 @@ const tokenDictioanry = {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: { top: 5, bottom: 15 }, // ✅ Prevents unnecessary spacing
+    },
     scales: {
       y: {
         ticks: {
           color: 'white',
+          font: { size: window.innerWidth < 600 ? 12 : 14 },
+          maxTicksLimit: window.innerWidth < 600 ? 4 : 6,
+          autoSkip: true,
           callback: function (value) {
             return value >= 1000 ? `${value / 1000}k` : value.toFixed(2);
           },
         },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        grid: {
+          display: window.innerWidth < 600 ? false : true, // ✅ Hides grid lines
+          drawBorder: false, // ✅ Removes axis border line
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
       },
       x: {
         ticks: {
           color: 'white',
-          maxTicksLimit: 6,
+          font: { size: window.innerWidth < 600 ? 12 : 14 },
+          maxTicksLimit: window.innerWidth < 600 ? 3 : 6,
+          autoSkip: true,
           maxRotation: 0,
           minRotation: 0,
         },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        grid: {
+          display: window.innerWidth < 600 ? false : true, // ✅ Hides grid lines
+          drawBorder: false, // ✅ Removes axis border line
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
       },
     },
     plugins: {
+      legend: {
+        display: false, // ✅ Hide dataset labels in legend
+      },
       zoom: {
         pan: { enabled: true, mode: 'x' },
         zoom: { enabled: true, mode: 'x', drag: true },
       },
     },
   };
+
   const toCapitalCase = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
   return (
     <div style={{ height: isMdUp ? '400px' : '200px', width: '100%' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <Typography variant="h6" gutterBottom>
-          Real Price ({toCapitalCase(selectedToken)})
+          {toCapitalCase(selectedToken)} USD
         </Typography>
         <CustomSwitch groupByDay={groupByDay} setGroupByDay={setGroupByDay} />
       </Box>
