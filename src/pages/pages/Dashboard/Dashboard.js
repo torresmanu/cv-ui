@@ -13,7 +13,6 @@ import TopGainersCard from './TopGainers';
 
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { hi } from 'date-fns/locale';
 import CandlePlotChart from './CandlePlotChart';
 import FramerCard from '../FreeDashboard/FrameCard';
 
@@ -52,7 +51,7 @@ const Dashboard = () => {
     { id: 'chainlink', symbol: 'LINK' },
     { id: 'litecoin', symbol: 'LTC' },
     { id: 'binancecoin', symbol: 'BNB' },
-    { id: 'matic-network', symbol: 'MATIC' },
+    { id: 'ripple', symbol: 'XRP' },
     { id: 'solana', symbol: 'SOL' },
   ]);
 
@@ -60,9 +59,10 @@ const Dashboard = () => {
     'bitcoin': 'BTC',
     'ethereum': 'ETH',
     'cardano': 'ADA',
+    'chainlink': 'LINK',
     'litecoin': 'LTC',
     'binancecoin': 'BNB',
-    'polygon': 'MATIC',
+    'ripple': 'XRP',
     'solana': 'SOL',
   };
 

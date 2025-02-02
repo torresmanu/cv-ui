@@ -5,8 +5,11 @@ const tokens = [
   { id: 'bitcoin', symbol: 'BTC' },
   { id: 'ethereum', symbol: 'ETH' },
   { id: 'cardano', symbol: 'ADA' },
+  { id: 'chainlink', symbol: 'LINK' },
   { id: 'litecoin', symbol: 'LTC' },
-  {id: 'binancecoin', symbol: 'BNB' },                      
+  {id: 'binancecoin', symbol: 'BNB' },
+  { id: 'ripple', symbol: 'XRP' },
+  { id: 'solana', symbol: 'SOL' },                      
 ];
 const API_KEY = 'CG-Pd9barSNAVtBvNPYm8xkzJXp';
 

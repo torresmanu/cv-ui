@@ -14,11 +14,11 @@ const tokenImages = {
   BTC: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
   ETH: ethImage,
   ADA: adaImage,
- // LINK: linkImage,
+  LINK: linkImage,
   LTC: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png',
   BNB: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
- // MATIC: maticImage,
- //SOL: 'https://cryptologos.cc/logos/solana-sol-logo.png',
+  XRP: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
+  SOL: 'https://cryptologos.cc/logos/solana-sol-logo.png',
 };
 
 // token map
@@ -26,9 +26,11 @@ const tokenMap = {
   bitcoin: 'BTC',
   ethereum: 'ETH',
   cardano: 'ADA',
+  chainlink: 'LINK',
   litecoin: 'LTC',
   binancecoin: 'BNB',
-
+  ripple: 'XRP',
+  solana: 'SOL',
 };
 // Function to get the key by value
 const getKeyByValue = (map, value) => {

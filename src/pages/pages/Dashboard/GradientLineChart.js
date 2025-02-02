@@ -26,9 +26,10 @@ const tokenDictioanry = {
   'bitcoin': 'BTC',
   'ethereum': 'ETH',
   'cardano': 'ADA',
+  'chainlink': 'LINK',
   'litecoin': 'LTC',
   'binancecoin': 'BNB',
-  'polygon': 'MATIC',
+  'ripple': 'XRP',
   'solana': 'SOL',
 };
 
