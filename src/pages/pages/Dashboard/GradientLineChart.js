@@ -41,7 +41,7 @@ const tokenDictioanry = {
 
   const groupByDayAndAverage = (data) => {
     const groupedData = {};
-    data.forEach((entry) => {
+    data?.forEach((entry) => {
       const dateKey = entry.date.toISOString().split('T')[0];
       if (!groupedData[dateKey]) {
         groupedData[dateKey] = { totalRealPrice: 0, count: 0 };
@@ -55,25 +55,33 @@ const tokenDictioanry = {
     }));
   };
 
+  // ✅ Get the last two data points
+  const dataToPlot = groupByDay ? groupByDayAndAverage(tokenData) : tokenData;
+  const lastPoint = dataToPlot[dataToPlot.length - 1];
+  const secondLastPoint = dataToPlot[dataToPlot.length - 2];
+
   const chartData = (canvas) => {
-    const ctx = canvas.getContext('2d');
-    const height = window.innerWidth < 600 ? 150 : 300; // ✅ Adaptive height based on screen size
-    const gradient = ctx.createLinearGradient(0, 0, 0, height); 
-    gradient.addColorStop(0, 'rgba(72, 177, 85, 0.3)');
-    gradient.addColorStop(1, 'rgba(72, 177, 85, 0)');
-
     if (!tokenData) return;
-
-    const dataToPlot = groupByDay ? groupByDayAndAverage(tokenData) : tokenData;
-
-    // Format dates to 'dd MMM yyyy'
+  
+    const ctx = canvas.getContext('2d');
+    const height = window.innerWidth < 600 ? 150 : 300;
+  
+    // ✅ Determine gradient color (green if price increased, red if decreased)
+    const isPriceDown = secondLastPoint && lastPoint.avgRealPrice < secondLastPoint.avgRealPrice;
+    const gradientColor = isPriceDown ? 'rgba(255, 51, 51, 0.3)' : 'rgba(72, 177, 85, 0.3)'; // 🔴🟢
+  
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, gradientColor);
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)'); // Fade to transparent
+  
+    // ✅ Format dates
     const formattedDates = dataToPlot.map((item) =>
       new Intl.DateTimeFormat('en-US', {
         day: '2-digit',
         month: 'short',
       }).format(item.date)
     );
-
+  
     return {
       labels: formattedDates,
       datasets: [
@@ -81,7 +89,7 @@ const tokenDictioanry = {
           data: dataToPlot.map((item) => item.avgRealPrice || item.realPrice),
           fill: true,
           backgroundColor: gradient,
-          borderColor: 'rgba(72, 177, 85, 0.8)',
+          borderColor: isPriceDown ? 'rgba(255, 51, 51, 0.8)' : 'rgba(72, 177, 85, 0.8)', // 🔴🟢 Line color matches gradient
           pointRadius: 0, // ✅ Small visible points
           pointHoverRadius: 6, // ✅ Larger points on hover
           pointHitRadius: 10, // ✅ Easier to hover over points

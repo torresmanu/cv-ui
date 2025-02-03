@@ -69,6 +69,9 @@ const TopGainersCard = () => {
         <Box className={classes.header}>
           <Typography variant="h6">Top Gainers</Typography>
         </Box>
+        <Typography variant="body2" gutterBottom style={{ marginBottom: 30 }}>
+          Based on market cap
+        </Typography>
 
         {status === 'loading' && (
           <Box>
