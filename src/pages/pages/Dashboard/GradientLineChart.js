@@ -149,9 +149,10 @@ const tokenDictioanry = {
   return (
     <div style={{ height: isMdUp ? '400px' : '200px', width: '100%' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <Typography variant="h6" gutterBottom>
-          {toCapitalCase(selectedToken)} USD
-        </Typography>
+      <Typography variant="h6" gutterBottom>
+        {toCapitalCase(selectedToken)} USD 
+        {lastPoint ? ` - $${lastPoint.avgRealPrice.toFixed(2)}` : ''}
+      </Typography>
         <CustomSwitch groupByDay={groupByDay} setGroupByDay={setGroupByDay} />
       </Box>
       {status === 'loading' ? (
