@@ -33,6 +33,7 @@ const FreeDashboard = NeedsLogin(() => import("../pages/pages/FreeDashboard"));
 const MyAccount = NeedsLogin(() => import("../pages/pages/Account/MyAccount"));
 
 const Home = async(() => import("../pages/pages/home/Homepage"));
+const CvPage = async(() => import("../pages/pages/home/CvPage"));
 
 const homeRoutes = {
   id: "Home",
@@ -93,7 +94,7 @@ const authRoutes = {
 
 const DashboardRoutes = {
   id: "Dashboard",
-  path: "/",
+  path: "/dashboard",
   component: Dashboard,
   icon: <BarChart />,
 };
@@ -106,9 +107,15 @@ const FreeDashboardRoutes = {
 };
 
 const landingRoutes = {
-    path: "/landing",
+    path: "/",
     name: "Landing",
     component: Home,
+};
+
+const cvRoutes = {
+    path: "/cv",
+    name: "Curriculum Vitae",
+    component: CvPage,
 };
 
 
@@ -120,7 +127,7 @@ export const dashboard = [
 
 export const auth = [authRoutes];
 
-export const landing = [landingRoutes, homeRoutes];
+export const landing = [landingRoutes, homeRoutes, cvRoutes];
 
 export default [
   accountRoutes,
